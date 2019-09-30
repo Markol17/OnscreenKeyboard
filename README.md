@@ -1,4 +1,4 @@
-# Onscreen_Keyboard
+# Onscreen Keyboard
 
 ## Install dependencies
 
