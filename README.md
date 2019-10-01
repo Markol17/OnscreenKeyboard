@@ -8,5 +8,5 @@
 Kelvin Phan <br/>
 Joshua Lai <br/>
 Mark-Olivier Poulin <br/>
-Ara Kirikian
+Ara Kirijian
 
