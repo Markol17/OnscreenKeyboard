@@ -6,4 +6,5 @@
 ## Contributors
 
 Kelvin Phan
+Joshua Lai
 
