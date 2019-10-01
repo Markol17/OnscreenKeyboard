@@ -5,6 +5,8 @@
 ``` Yarn ```
 ## Contributors
 
-Kelvin Phan
-Joshua Lai
+Kelvin Phan <br/>
+Joshua Lai <br/>
+Mark-Olivier <br/>
+Ara Kirikian
 
