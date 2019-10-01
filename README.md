@@ -3,4 +3,7 @@
 ## Install dependencies
 
 ``` Yarn ```
+## Contributors
+
+Kelvin Phan
 
