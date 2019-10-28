@@ -1,48 +1,47 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
  * @format
  * @flow
  */
 
-import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
+ import React from 'react';
+ import {
+   SafeAreaView,
+   StyleSheet,
+   ScrollView,
+   View,
+   Text,
+   StatusBar,
+ } from 'react-native';
+ import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
+ import HamburgerMenu from './HamburgerMenu';
 
-// import {
-//   Header,
-//   LearnMoreLinks,
-//   Colors,
-//   DebugInstructions,
-//   ReloadInstructions,
-// } from 'react-native/Libraries/NewAppScreen';
 class Container extends React.Component {
 
   render() {
     const {
       children,
-      title,
+      text_bar,
       onInit,
+      hamburgerItems,
     } = this.props;
 
     return (
       <View
         style={styles.container}
       >
-        <Text
-          style={styles.title}
-        >
-          {title}
-        </Text>
+      <View
+        style={styles.header}
+      >
+      <HamburgerMenu
+      items={hamburgerItems}
+      />
 
+        <Text
+          style={styles.text_bar}
+        >
+          {text_bar}
+        </Text>
+      </View>
         <DragResizeContainer
           style={styles.canvas}
           onInit={onInit}
@@ -67,13 +66,14 @@ class Main extends React.Component{
 
     return(
       <Container
-        title={this.state.content}
+        text_bar={this.state.content}
         onInit={(limitation) => {
           this.setState(() => {
             this.state.limitation1 = limitation;
             return this.state;
           });
         }}
+        hamburgerItems={"hello"}
       >
       <DragResizeBlock
         x={10}
@@ -305,18 +305,31 @@ class Main extends React.Component{
 const styles = StyleSheet.create({
   canvas: {
     width: '100%',
-    height: '100%',
+    height: '80%',
     backgroundColor: '#f5f5f5',
     marginTop: 4,
+
   },
   Container:{
 
     },
-  title:{
+  text_bar:{
     fontSize:20,
+    height:'100%',
     maxHeight:40,
-
+    maxWidth:'90%',
+    minWidth:'90%',
+    marginLeft:10,
+    backgroundColor:'white',
+    borderWidth:2,
+    borderColor:'black',
     },
+    header:{
+
+      flex:1,
+      flexDirection:'row',
+      //backgroundColor:'red',
+      },
 });
 
 export default Main;
