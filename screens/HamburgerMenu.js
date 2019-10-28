@@ -17,7 +17,7 @@ import MainView from './MainView';
 
 
 const { width } = Dimensions.get("window");
-//const { items } = this.props;
+//const { items } = this.props; this is gonna be used to pass custoim componennts in the drawer menu
 const hamburger = <Icon name="menuunfold" size={40}  />;
 class HamburgerMenu extends React.Component {
   render(){
