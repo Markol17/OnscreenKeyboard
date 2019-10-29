@@ -29,25 +29,26 @@ class Container extends React.Component {
       <View
         style={styles.container}
       >
+
       <View
         style={styles.header}
       >
-      <HamburgerMenu
-      items={hamburgerItems}
-      />
-
+        <HamburgerMenu
+        items={hamburgerItems}
+        />
         <Text
           style={styles.text_bar}
         >
           {text_bar}
         </Text>
+
       </View>
-        <DragResizeContainer
-          style={styles.canvas}
-          onInit={onInit}
-        >
-          {children}
-        </DragResizeContainer>
+      <DragResizeContainer
+        style={styles.canvas}
+        onInit={onInit}
+      >
+        {children}
+      </DragResizeContainer>
       </View>
     );
   }
@@ -99,6 +100,7 @@ class Main extends React.Component{
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
+
 
           }}>
           <Text style={{
@@ -305,13 +307,14 @@ class Main extends React.Component{
 const styles = StyleSheet.create({
   canvas: {
     width: '100%',
-    height: '80%',
-    backgroundColor: '#f5f5f5',
-    marginTop: 4,
+    height:'90%',
 
+    zIndex:0,
   },
   Container:{
-
+    flex: 1,
+    flexDirection:'column',
+      justifyContent: 'space-between',
     },
   text_bar:{
     fontSize:20,
@@ -319,16 +322,17 @@ const styles = StyleSheet.create({
     maxHeight:40,
     maxWidth:'90%',
     minWidth:'90%',
-    marginLeft:10,
+
     backgroundColor:'white',
     borderWidth:2,
     borderColor:'black',
+
     },
     header:{
-
       flex:1,
-      flexDirection:'row',
-      //backgroundColor:'red',
+  flexDirection:'row',
+  justifyContent: 'space-between',
+  zIndex:0,
       },
 });
 
