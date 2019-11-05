@@ -20,5 +20,3 @@ Kelvin Phan <br/>
 Joshua Lai <br/>
 Mark-Olivier Poulin <br/>
 Ara Kirijian
-
-test
