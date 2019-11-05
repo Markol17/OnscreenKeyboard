@@ -76,80 +76,18 @@ class Main extends React.Component{
         }}
         hamburgerItems={"hello"}
       >
+
       <DragResizeBlock
-        x={10}
-        y={0}
+        x={-5}
+        y={-5}
         isDisabled={this.state.enabled}
         onPress = {() => {
+      
           if(this.state.enabled === true){
           this.setState({
 
-              content: this.state.content + "A",
-            })
-          }
-        }}
+              content: this.state.content + "q",
 
-        connectors={['tl','tr','c','br','bl']}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#36d165',
-            borderWidth:2,
-            borderColor:'black',
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-
-
-          }}>
-          <Text style={{
-            fontSize: 60,
-            }}>A</Text>
-          </View>
-      </DragResizeBlock>
-      <DragResizeBlock
-        x={500}
-        y={0}
-        w={250}
-        h={250}
-        isDisabled={this.state.enabled}
-        onPress = {() => {
-          if(this.state.enabled === true){
-            this.setState({
-
-                content: this.state.content + "Table",
-              })
-            }
-        }}
-
-        connectors={['tl','tr','c','br','bl']}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'white',
-            borderWidth:2,
-            borderColor:'black',
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-
-          }}>
-          <Text style={{
-            fontSize: 60,
-            }}>Table</Text>
-          </View>
-      </DragResizeBlock>
-      <DragResizeBlock
-        x={120}
-        y={0}
-        isDisabled={this.state.enabled}
-        onPress = {() => {
-          if(this.state.enabled === true){
-          this.setState({
-
-              content: this.state.content + "B",
             })
           }
         }}
@@ -166,54 +104,22 @@ class Main extends React.Component{
             alignItems: "center",
             justifyContent: "center",
 
+
           }}>
           <Text style={{
             fontSize: 60,
-            }}>B</Text>
+            }}>q</Text>
           </View>
       </DragResizeBlock>
       <DragResizeBlock
-        x={230}
-        y={0}
+        x={85}
+        y={-5}
         isDisabled={this.state.enabled}
         onPress = {() => {
           if(this.state.enabled === true){
           this.setState({
 
-              content: this.state.content + "D",
-            })
-          }
-        }}
-
-        connectors={['tl','tr','c','br','bl']}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: '#e330d7',
-            borderWidth:2,
-            borderColor:'black',
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-
-          }}>
-          <Text style={{
-            fontSize: 60,
-            }}>D</Text>
-          </View>
-      </DragResizeBlock>
-      <DragResizeBlock
-        x={190}
-        y={250}
-        w={400}
-        h={100}
-        isDisabled={this.state.enabled}
-        onPress = {() => {
-          if(this.state.enabled === true){
-          this.setState({
-
-              content: this.state.content + " ",
+              content: this.state.content + "w",
             })
           }
         }}
@@ -230,17 +136,178 @@ class Main extends React.Component{
             alignItems: "center",
             justifyContent: "center",
 
+
           }}>
           <Text style={{
             fontSize: 60,
-            }}>Space</Text>
+            }}>w</Text>
           </View>
       </DragResizeBlock>
       <DragResizeBlock
-        x={250}
-        y={110}
-        w={250}
-        h={120}
+        x={175}
+        y={-5}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "e",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>e</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={265}
+        y={-5}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "r",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>r</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={355}
+        y={-5}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "t",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>t</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={445}
+        y={-5}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "y",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>y</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={535}
+        y={-5}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "u",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>u</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={625}
+        y={-5}
+        w={178}
+
         isDisabled={this.state.enabled}
         onPress = {() => {
           if(this.state.enabled === true){
@@ -264,15 +331,239 @@ class Main extends React.Component{
 
           }}>
           <Text style={{
-            fontSize: 60,
+            fontSize: 40,
             }}>Delete</Text>
           </View>
       </DragResizeBlock>
       <DragResizeBlock
-        x={20}
-        y={110}
-        w={200}
-        h={120}
+        x={-5}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "i",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>i</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={85}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "o",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>o</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={175}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "p",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>p</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={265}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "a",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>a</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={355}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "s",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>s</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={445}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "d",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>d</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={535}
+        y={85}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "f",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>f</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={625}
+        y={85}
+        w={178}
+
         isDisabled={this.state.enabled}
         onPress = {() => {
           this.setState({
@@ -299,6 +590,487 @@ class Main extends React.Component{
             }}>Edit</Text>
           </View>
       </DragResizeBlock>
+      <DragResizeBlock
+        x={-5}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "g",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>g</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={85}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "h",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>h</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={175}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "j",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>j</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={265}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "k",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>k</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={355}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "l",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>l</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={445}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "z",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>z</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={535}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "x",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>x</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={625}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "c",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>c</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={715}
+        y={175}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "v",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>v</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={-5}
+        y={265}
+        w={190}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>Shift</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={265}
+        y={265}
+        w={280}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + " ",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}></Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={175}
+        y={265}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "b",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>b</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={535}
+        y={265}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "n",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>n</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={625}
+        y={265}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+              content: this.state.content + "m",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            }}>m</Text>
+          </View>
+      </DragResizeBlock>
+      <DragResizeBlock
+        x={715}
+        y={265}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+
+              content: this.state.content + "M",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'white',
+            borderWidth:2,
+            borderColor:'black',
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+
+          }}>
+          <Text style={{
+            fontSize: 30,
+            }}>?123</Text>
+          </View>
+      </DragResizeBlock>
       </Container>
   );
   }
@@ -307,14 +1079,15 @@ class Main extends React.Component{
 const styles = StyleSheet.create({
   canvas: {
     width: '100%',
-    height:'90%',
-
+    height:'100%',
     zIndex:0,
   },
   Container:{
+    height:"100%",
     flex: 1,
     flexDirection:'column',
       justifyContent: 'space-between',
+      backgroundColor:"transparent",
     },
   text_bar:{
     fontSize:20,
@@ -329,7 +1102,8 @@ const styles = StyleSheet.create({
 
     },
     header:{
-      flex:1,
+    minHeight:40,
+    flex:1,
   flexDirection:'row',
   justifyContent: 'space-between',
   zIndex:0,
