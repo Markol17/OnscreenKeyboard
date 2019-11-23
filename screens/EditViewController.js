@@ -82,6 +82,7 @@ export default class EditViewMenu extends Component {
       this.drawer.open();
     }} />
     return (
+
       <Drawer
         //open={true}
         ref={c => this.drawer = c}
@@ -108,6 +109,8 @@ export default class EditViewMenu extends Component {
         >
         {renderer}
       </Drawer>
+
+
     );
   }
 }
