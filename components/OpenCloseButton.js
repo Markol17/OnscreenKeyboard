@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   StyleSheet,
 } from 'react-native';
 
@@ -12,19 +12,19 @@ export default class Button extends Component {
   render() {
     let icon;
     if(this.props.icon === "open"){
-      icon = <Icon name="menu" size={40}  />;
+      icon = <Icon name="menu" size={40}  color={"white"}/>;
     }else{
-      icon = <Icon name="close" size={40}  color={"white"}/>;
+      icon = <Icon name="close" size={60}  color={"white"}/>;
     }
     return(
-      <TouchableHighlight
+      <TouchableOpacity
         style={this.props.style}
         underlayColor="#B5B5B5"
         onPress={() => {
           this.props.onPress();
         }}>
         {icon}
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 }
