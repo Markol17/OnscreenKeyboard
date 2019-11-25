@@ -14,21 +14,34 @@ import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
-const json = {
-  preset1:{
-    A:{
-      value:"A",
-      x:"100",
-      y:"100",
-      w:"100",
-      h:"100",
-      fontSize:"14",
-      backgroundColor:"white",
+const presetExample = [
+    {
+      id:1,
+      value:"Q",
+      x:0,
+      y:0,
+      w:100,
+      h:100,
+      fontSize:60,
+      textColor:"white",
+      backgroundColor:"transparent",
       keyPress:"1",
       onKeyRelease:false,
     },
-  }
-}
+    {
+      id:2,
+      value:"W",
+      x:90,
+      y:0,
+      w:100,
+      h:100,
+      fontSize:60,
+      textColor:"white",
+      backgroundColor:"transparent",
+      keyPress:"1",
+      onKeyRelease:false,
+    },
+  ]
 
 export default class MainView extends React.Component {
   constructor(props) {
@@ -39,9 +52,7 @@ export default class MainView extends React.Component {
     };
   }
   render() {
-    // {this.json.map((object, index) => {
-    //
-    // })}
+
     return (
     <View>
     <View style={styles.header}>
@@ -63,39 +74,45 @@ export default class MainView extends React.Component {
           return null
         }}
       >
+     {presetExample.map((object, index) => {
+       //console.log(object.x);
+       return(
+       <DragResizeBlock
+         x={object.x}
+         y={object.y}
+         w={object.w}
+         h={object.h}
+         isDisabled={this.state.enabled}
+         onPress = {() => {
+           if(this.state.enabled === true){
+           this.setState({
+               content: this.state.content + object.value,
+             })
+           }
+         }}
 
-      <DragResizeBlock
-        x={0}
-        y={0}
-        isDisabled={this.state.enabled}
-        onPress = {() => {
-          if(this.state.enabled === true){
-          this.setState({
-              content: this.state.content + "Q",
-            })
-          }
-        }}
+         connectors={['tl','tr','c','br','bl']}>
+         <View
+           style={{
+             width: '100%',
+             height: '100%',
+             backgroundColor: object.backgroundColor,
+             borderWidth:2,
+             borderColor:'white',
+             borderRadius:4,
+             flex: 1,
+             alignItems: "center",
+             justifyContent: "center",
 
-        connectors={['tl','tr','c','br','bl']}>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            backgroundColor: 'transparent',
-            borderWidth:2,
-            borderColor:'white',
-            borderRadius:4,
-            flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-
-          }}>
-          <Text style={{
-            fontSize: 60,
-            color:"white",
-          }}>Q</Text>
-          </View>
-      </DragResizeBlock>
+           }}>
+           <Text style={{
+             fontSize: object.fontSize,
+             color:object.textColor,
+           }}>{object.value}</Text>
+           </View>
+       </DragResizeBlock>
+      )
+      })}
       </DragResizeContainer>
     </View>
     </View>
@@ -123,7 +140,7 @@ const styles = StyleSheet.create({
      marginRight:1,
      borderWidth:2,
      borderRadius:4,
-     borderColor:"#f5a638",
+     borderColor:"#f5a638",//#f5a638
      fontSize:22,
      padding:2,
      paddingLeft:8,

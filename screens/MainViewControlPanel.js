@@ -8,6 +8,7 @@ import {
   ScrollView,
 } from 'react-native';
 
+import DropDownItem from "react-native-drop-down-item";
 import Button from '../components/OpenCloseButton';
 import Icon1 from 'react-native-vector-icons/Fontisto';
 import Icon2 from 'react-native-vector-icons/Ionicons';
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
    closeButton:{
      width:60,
      height:60,
-     marginLeft:20,
+     marginLeft:10,
    },
    menu: {
      fontSize: 30,
@@ -126,6 +127,6 @@ const styles = StyleSheet.create({
    bar:{
      height:1,
      width: "82%",
-     backgroundColor:"#f5a638",
+     backgroundColor:"#f5a638",//#32a852
   },
 })
