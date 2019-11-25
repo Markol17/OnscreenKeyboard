@@ -4,24 +4,44 @@ import {
   Text,
   View,
   Dimensions,
+  ScrollView,
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import Button from '../components/OpenCloseButton';
+import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
 
+const width = Dimensions.get("window").width;
+const height = Dimensions.get("window").height;
 
-const { width } = Dimensions.get("window");
+const json = {
+  preset1:{
+    A:{
+      value:"A",
+      x:"100",
+      y:"100",
+      w:"100",
+      h:"100",
+      fontSize:"14",
+      backgroundColor:"white",
+      keyPress:"1",
+      onKeyRelease:false,
+    },
+  }
+}
 
 export default class MainView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       enabled: true,
-
+      content:"",
     };
   }
   render() {
-
+    // {this.json.map((object, index) => {
+    //
+    // })}
     return (
     <View>
     <View style={styles.header}>
@@ -33,11 +53,50 @@ export default class MainView extends React.Component {
         style={styles.button}
       />
 
-    <Text style={styles.textInput} >hello</Text>
+    <Text style={styles.textInput}>{this.state.content}</Text>
 
     </View>
     <View style={styles.container}>
-      <Text>Renderer</Text>
+      <DragResizeContainer
+        style={styles.canvas}
+        onInit={() => {
+          return null
+        }}
+      >
+
+      <DragResizeBlock
+        x={0}
+        y={0}
+        isDisabled={this.state.enabled}
+        onPress = {() => {
+          if(this.state.enabled === true){
+          this.setState({
+              content: this.state.content + "Q",
+            })
+          }
+        }}
+
+        connectors={['tl','tr','c','br','bl']}>
+        <View
+          style={{
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'transparent',
+            borderWidth:2,
+            borderColor:'white',
+            borderRadius:4,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+
+          }}>
+          <Text style={{
+            fontSize: 60,
+            color:"white",
+          }}>Q</Text>
+          </View>
+      </DragResizeBlock>
+      </DragResizeContainer>
     </View>
     </View>
     );
@@ -70,8 +129,14 @@ const styles = StyleSheet.create({
      paddingLeft:8,
      //padding:5,
    },
+   //container for the keyboard
    container:{
      height:"100%",
      backgroundColor:"#1a1a1a",
+   },
+   canvas:{
+     width:width,
+     height:height-41.5,
+    //backgroundColor:"red",
    },
 })
