@@ -27,7 +27,7 @@ import EditViewControlPanel from './EditViewControlPanel'
 
 const { width } = Dimensions.get("window");
 
-export default class EditViewMenu extends Component {
+export default class EditViewController extends Component {
 
   constructor(props, context) {
     super(props, context);
@@ -75,12 +75,19 @@ export default class EditViewMenu extends Component {
   // }
 
   render() {
-    var editViewControlPanel = <EditViewControlPanel closeDrawer={() => {
-      this.drawer.close();
-    }} />
-    var renderer = <Renderer openDrawer={() => {
-      this.drawer.open();
-    }} />
+    var editViewControlPanel = <EditViewControlPanel
+      closeDrawer={() => {
+        this.drawer.close();
+      }}
+      goBack={() => {
+          this.props.navigation.goBack()
+        }}
+    />
+    var renderer = <Renderer
+      openDrawer={() => {
+        this.drawer.open();
+      }}
+    />
     return (
 
       <Drawer
@@ -109,7 +116,6 @@ export default class EditViewMenu extends Component {
         >
         {renderer}
       </Drawer>
-
 
     );
   }

@@ -5,10 +5,10 @@ import {
   View,
 
 } from 'react-native';
-import Main from './EditView';
 
 
-export default class MainView extends React.Component {
+
+export default class SettingsView extends React.Component {
 
   render() {
 
