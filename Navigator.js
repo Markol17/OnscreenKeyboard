@@ -21,7 +21,7 @@ const AppStackNavigator = createStackNavigator({
     }
   },
 
-    Setting:{
+    Settings:{
       screen: SettingsView,
       navigationOptions: {
         header: null,

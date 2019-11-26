@@ -76,17 +76,21 @@ export default class EditViewController extends Component {
 
   render() {
     var editViewControlPanel = <EditViewControlPanel
-      closeDrawer={() => {
-        this.drawer.close();
-      }}
-      goToEdit={() => {
-          this.props.navigation.navigate("Edit")
+        closeDrawer={() => {
+            this.drawer.close();
+        }}
+        goToEdit={() => {
+            this.props.navigation.navigate("Edit")
+        }}
+        goToSettings={() => {
+            this.props.navigation.navigate("Settings")
         }}
     />
     var renderer = <Renderer
       openDrawer={() => {
         this.drawer.open();
       }}
+
     />
     return (
 

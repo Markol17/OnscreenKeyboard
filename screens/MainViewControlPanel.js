@@ -62,6 +62,14 @@ export default class EditViewControlPanel extends Component {
               onPress={() => this.props.goToEdit()}>
               <Text style={styles.text2}>Edit</Text>
               <Icon2 name="ios-arrow-forward" size={25}  color={"white"}/>
+                    </TouchableOpacity >
+                    <View style={styles.bar}></View>
+            <TouchableOpacity
+              style={styles.menuButton}
+                        onPress={() => this.props.goToSettings()}>
+               <Icon2 name="md-settings" size={30} color={"white"} />
+              <Text style={styles.text1}>Settings</Text>
+              
             </TouchableOpacity >
 
           </View>

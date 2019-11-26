@@ -469,7 +469,7 @@ export default class MainView extends React.Component {
     super(props);
     this.state = {
       enabled: true,
-      content:"",
+        content: "",
     };
   }
   render() {
