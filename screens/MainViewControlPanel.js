@@ -58,12 +58,6 @@ export default class EditViewControlPanel extends Component {
             </TouchableOpacity >
             <View style={styles.bar}></View>
             <TouchableOpacity
-              style={styles.menuButton}>
-              <Icon2 name="md-clipboard" size={25}  color={"white"}/>
-              <Text style={styles.text1}>Clipboard</Text>
-            </TouchableOpacity >
-            <View style={styles.bar}></View>
-            <TouchableOpacity
               style={styles.menuButton}
               onPress={() => this.props.goToEdit()}>
               <Text style={styles.text2}>Edit</Text>
