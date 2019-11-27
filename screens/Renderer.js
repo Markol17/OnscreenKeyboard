@@ -12,6 +12,7 @@ import Button from '../components/OpenCloseButton';
 import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
+
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 
@@ -258,6 +259,7 @@ export default class MainView extends React.Component {
                       })
                     }
                     ReactNativeHapticFeedback.trigger("impactLight", options);
+
                   }}
 
                   connectors={['tl','tr','c','br','bl']}>

@@ -19,9 +19,13 @@ const drawerStyles = {
 }
 
 import Drawer from 'react-native-drawer';
+
 import Renderer from './Renderer';
-import EditViewControlPanel from './MainViewControlPanel';
-//import DataController from '../DataController';
+import MainViewControlPanel from './MainViewControlPanel';
+
+import FlashMessage from "react-native-flash-message";
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 import * as firebase from 'firebase';
 // import tweens from './tweens';
 
@@ -52,6 +56,7 @@ export default class EditViewController extends Component {
       // tweenHandlerOn: false, animation stuff to make different animations (requires extra file)
       // tweenDuration: 350, animation to make different animations (requires extra file)
       // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
+
       disabled: false,
       tweenHandlerPreset: null,
       acceptDoubleTap: false,
@@ -61,11 +66,49 @@ export default class EditViewController extends Component {
       negotiatePan: true,
       side: "left",
       data: [],
+      presets:[],
     };
     if (!firebase.apps.length) {
-      this.app = firebase.initializeApp(config);
+       firebase.initializeApp(config);
     }
+
+  }
+  //component is a deprecated method should update in the future
+  componentWillMount(){
     this.get("Default")
+    this.getAll()
+  }
+  componentDidUpdate(){
+    if(this.state.data.length != 0){
+      showMessage({
+        message: "Success",
+        description:"Preset loaded succesfully!",
+        type: "success",
+      });
+    }
+  }
+  componentDidMount(){
+    if(this.state.data.length === 0){
+    showMessage({
+      message: "Error",
+      description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
+      type: "danger",
+    });
+  }
+  }
+  //db custom methods
+  getAll(){
+    const previous = this.state.presets
+    firebase.database().ref().on("value", (data) => {
+      //javascript can be really weird sometimes. Having a for loop here wont affect the performances thaqt much since theres a small amount of items
+      const output = Object.keys(data.val())
+      for(let i=0; i<output.length; i++){
+        previous.push(output[i])
+      }
+        this.setState({
+          presets: previous
+        })
+    })
   }
 
   get(name){
@@ -75,6 +118,8 @@ export default class EditViewController extends Component {
         })
     })
   }
+  
+  //should go in editviewcontrol
   push(name, content){
     firebase.database().ref(name).set(
       content
@@ -106,7 +151,7 @@ export default class EditViewController extends Component {
 
 
   render() {
-    var editViewControlPanel = <EditViewControlPanel
+    const mainViewControlPanel = <MainViewControlPanel
         closeDrawer={() => {
             this.drawer.close();
         }}
@@ -117,15 +162,16 @@ export default class EditViewController extends Component {
         goToSettings={() => {
             this.props.navigation.navigate("Settings")
         }}
+        presets={this.state.presets}
     />
-    var renderer = <Renderer
+    const renderer = <Renderer
       openDrawer={() => {
         this.drawer.open();
       }}
       data={this.state.data}
     />
     return (
-
+      <View style={{height:"100%", height:"100%"}}>
       <Drawer
         //open={true}
         ref={c => this.drawer = c}
@@ -137,7 +183,7 @@ export default class EditViewController extends Component {
         panCloseMask={this.state.panCloseMask}
         relativeDrag={this.state.relativeDrag}
         panThreshold={this.state.panThreshold}
-        content={editViewControlPanel}
+        content={mainViewControlPanel}
         styles={drawerStyles}
         disabled={this.state.disabled}
         // tweenHandler={this.tweenHandler.bind(this)}
@@ -152,7 +198,8 @@ export default class EditViewController extends Component {
         >
         {renderer}
       </Drawer>
-
+      <FlashMessage position="top" icon="auto" />
+      </View>
     );
   }
 }

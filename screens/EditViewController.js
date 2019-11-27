@@ -77,7 +77,7 @@ export default class EditViewController extends Component {
   // }
 
   render() {
-    var editViewControlPanel = <EditViewControlPanel
+    const editViewControlPanel = <EditViewControlPanel
       closeDrawer={() => {
         this.drawer.close();
       }}
@@ -85,7 +85,7 @@ export default class EditViewController extends Component {
           this.props.navigation.goBack()
         }}
     />
-    var renderer = <Renderer
+    const renderer = <Renderer
       openDrawer={() => {
         this.drawer.open();
       }}
