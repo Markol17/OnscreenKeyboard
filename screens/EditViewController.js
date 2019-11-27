@@ -29,14 +29,15 @@ const { width } = Dimensions.get("window");
 
 export default class EditViewController extends Component {
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       drawerType: 'overlay',
       openDrawerOffset: (width / 2) + (width / 6),
       closedDrawerOffset:0,
       relativeDrag: false,
-      panThreshold: .25,
+      panThreshold: .15,
+
       // tweenHandlerOn: false, animation stuff to make different animations (requires extra file)
       // tweenDuration: 350, animation to make different animations (requires extra file)
       // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
@@ -46,8 +47,9 @@ export default class EditViewController extends Component {
       acceptTap: false,
       acceptPan: true,
       tapToClose: false,
-      negotiatePan: false,
+      negotiatePan: true,
       side: "left",
+      data:[],
     };
   }
 
@@ -87,6 +89,7 @@ export default class EditViewController extends Component {
       openDrawer={() => {
         this.drawer.open();
       }}
+      data={this.state.data}
     />
     return (
 

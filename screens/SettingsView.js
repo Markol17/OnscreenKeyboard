@@ -36,7 +36,7 @@ export default class SettingsView extends React.Component {
                                 backgroundColor: "white"
                                 })}
                                 style={style.button}>
-                                <View style={this.themePreview("white")}></View>    
+                                <View style={this.themePreview("white")}></View>
                             </TouchableOpacity>
                             <TouchableOpacity
                                 onPress={() => this.setState({
@@ -86,7 +86,7 @@ export default class SettingsView extends React.Component {
                     </View>
 
                     <View style={this.borderStyle(this.state)}></View>
-                    
+
 
                     <View style={{ flex: 1, flexDirection: "column", alignItems: "center"}}>
                         <Text style={this.textStyle(this.state)}> Select a font colour</Text>
@@ -204,7 +204,7 @@ export default class SettingsView extends React.Component {
                     </View>
                 </View>
             </View>
-            
+
       );
   }
 
