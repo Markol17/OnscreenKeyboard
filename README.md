@@ -5,9 +5,6 @@ On-screen keyboard app for SVH
 
 ``` Yarn ```
 
-## Firebase
-Don't forget to include ```google-services.json``` file
-
 ## Link packages
 Make sure packages are linked with ``` react-native link ```
 
