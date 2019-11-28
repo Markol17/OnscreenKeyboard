@@ -38,6 +38,7 @@ export default class MainView extends React.Component {
     this.state = {
       enabled: true,
       content: "",
+      capsLock: false,
     };
   }
 
@@ -83,7 +84,7 @@ export default class MainView extends React.Component {
                       }
                       ReactNativeHapticFeedback.trigger("impactLight", options);
                     }}
-                    
+
 
                     connectors={['tl','tr','c','br','bl']}>
                     <View
@@ -223,8 +224,9 @@ export default class MainView extends React.Component {
                     h={object.h}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
-                      console.log("Caps")
-                      capsLock = !capsLock
+                      this.setState({
+                        capsLock: !this.state.capsLock
+                      })
                       ReactNativeHapticFeedback.trigger("impactLight", options);
 
                     }}
@@ -261,7 +263,7 @@ export default class MainView extends React.Component {
                   isDisabled={this.state.enabled}
                   onPress = {() => {
                       if (this.state.enabled === true) {
-                          if (capsLock) {
+                          if (this.state.capsLock) {
                               this.setState({
                                   content: this.state.content + object.value
                               })
@@ -269,7 +271,7 @@ export default class MainView extends React.Component {
                               this.setState({
                                   content: this.state.content + object.value.toLowerCase()
                               })
-                              
+
                           }
                     }
                     ReactNativeHapticFeedback.trigger("impactLight", options);
@@ -281,7 +283,7 @@ export default class MainView extends React.Component {
                     style={{
                       width: '100%',
                       height: '100%',
-                     
+
                       backgroundColor: object.backgroundColor,
                       borderWidth:2,
                       borderColor:'white',
