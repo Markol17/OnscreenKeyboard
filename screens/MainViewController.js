@@ -8,6 +8,7 @@ import {
   Text,
   View,
   Dimensions,
+  Clipboard,
 } from 'react-native';
 
 const drawerStyles = {
@@ -41,6 +42,7 @@ const config = {
 };
 
 const { width } = Dimensions.get("window");
+const exportTo = ["google", "email"]
 //const ref = new DataController;
 export default class EditViewController extends Component {
 
@@ -118,7 +120,7 @@ export default class EditViewController extends Component {
         })
     })
   }
-  
+
   //should go in editviewcontrol
   push(name, content){
     firebase.database().ref(name).set(
@@ -162,11 +164,35 @@ export default class EditViewController extends Component {
         goToSettings={() => {
             this.props.navigation.navigate("Settings")
         }}
+
+        returnedPreset={(presetName) =>{
+              this.get(presetName);
+        }}
+        returnedExport={(exportName) =>{
+          console.log(exportName)
+        }}
+
+        exports={exportTo}
         presets={this.state.presets}
     />
     const renderer = <Renderer
       openDrawer={() => {
         this.drawer.open();
+      }}
+      copyToClipboard={(string) =>{
+          Clipboard.setString(string);
+          let description = "There is nothing to copy!"
+          let message = "Error"
+          if(string.length != 0){
+            description = 'Copied "'+string+'" to clipboard succesfully!'
+            message = "Copied"
+          }
+          showMessage({
+            message: message,
+            description:description,
+            type: "info",
+          });
+
       }}
       data={this.state.data}
     />

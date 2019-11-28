@@ -12,12 +12,11 @@ import DropDownItem from "react-native-drop-down-item";
 import Button from '../components/OpenCloseButton';
 import Icon1 from 'react-native-vector-icons/Fontisto';
 import Icon2 from 'react-native-vector-icons/Ionicons';
-
-
-//NOT DONE YET
+import DropDown from '../components/DropDown';
 
 
 export default class EditViewControlPanel extends Component {
+
   render() {
     return (
       <View style={styles.controlPanel}>
@@ -33,29 +32,9 @@ export default class EditViewControlPanel extends Component {
         </View>
         <ScrollView>
           <View style={styles.menuItems}>
-            <TouchableOpacity
-              style={styles.menuButton}>
-              <Text style={styles.text2}>Presets</Text>
-              <Icon2 name="ios-arrow-down" size={25}  color={"white"}/>
-            </TouchableOpacity >
+            <DropDown type="presets" name="Presets" data={this.props.presets} passPresetName={(presetName) => this.props.returnedPreset(presetName)}/>
             <View style={styles.bar}></View>
-            <TouchableOpacity
-              style={styles.menuButton}>
-              <Text style={styles.text2}>Export to</Text>
-              <Icon2 name="ios-arrow-down" size={25}  color={"white"}/>
-            </TouchableOpacity >
-            <View style={styles.bar}></View>
-            <TouchableOpacity
-              style={styles.menuButton}>
-              <Icon1 name="google" size={25}  color={"white"}/>
-              <Text style={styles.text1}>Google</Text>
-            </TouchableOpacity >
-            <View style={styles.bar}></View>
-            <TouchableOpacity
-              style={styles.menuButton}>
-              <Icon1 name="email" size={25}  color={"white"}/>
-              <Text style={styles.text1}>Email</Text>
-            </TouchableOpacity >
+            <DropDown type="exportTo" name="Export to" data={this.props.exports} passPresetName={(exportName) => this.props.returnedExport(exportName)}/>
             <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}
@@ -69,7 +48,7 @@ export default class EditViewControlPanel extends Component {
                         onPress={() => this.props.goToSettings()}>
                <Icon2 name="md-settings" size={30} color={"white"} />
               <Text style={styles.text1}>Settings</Text>
-              
+
             </TouchableOpacity >
 
           </View>

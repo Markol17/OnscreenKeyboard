@@ -5,13 +5,16 @@ import {
   View,
   Dimensions,
   ScrollView,
+  TouchableOpacity,
+
 } from 'react-native';
 
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
 import Button from '../components/OpenCloseButton';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
 import ReactNativeHapticFeedback from "react-native-haptic-feedback";
-
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
@@ -51,7 +54,7 @@ export default class MainView extends React.Component {
       />
 
     <Text style={styles.textInput}>{this.state.content}</Text>
-
+    <TouchableOpacity style={styles.clipboard} onPress={() => {this.props.copyToClipboard(this.state.content)}}><Icon name="md-clipboard" size={25}  color={"white"}/></TouchableOpacity>
     </View>
     <View style={styles.container}>
       <DragResizeContainer
@@ -310,7 +313,7 @@ const styles = StyleSheet.create({
    textInput:{
      //backgroundColor:"#f7f7f7",
      color:"white",
-     width: width-55,
+     width: width-125,//55
      height:40,
      marginRight:1,
      borderWidth:2,
@@ -320,6 +323,16 @@ const styles = StyleSheet.create({
      padding:2,
      paddingLeft:8,
      //padding:5,
+   },
+   clipboard:{
+     width:50,
+     height:40,
+     marginRight:7,
+     borderColor:"#f5a638",
+     borderRadius:4,
+     borderWidth:2,
+     alignItems:"center",
+     justifyContent:"center",
    },
    //container for the keyboard
    container:{
