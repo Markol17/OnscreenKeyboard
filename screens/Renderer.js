@@ -18,6 +18,7 @@ import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
+capsLock = false;
 
 //haptic feedback options
 const options = {
@@ -82,6 +83,7 @@ export default class MainView extends React.Component {
                       }
                       ReactNativeHapticFeedback.trigger("impactLight", options);
                     }}
+                    
 
                     connectors={['tl','tr','c','br','bl']}>
                     <View
@@ -222,7 +224,9 @@ export default class MainView extends React.Component {
                     isDisabled={this.state.enabled}
                     onPress = {() => {
                       console.log("Caps")
+                      capsLock = !capsLock
                       ReactNativeHapticFeedback.trigger("impactLight", options);
+
                     }}
 
                     connectors={['tl','tr','c','br','bl']}>
@@ -253,13 +257,20 @@ export default class MainView extends React.Component {
                   x={object.x}
                   y={object.y}
                   w={object.w}
-                  h={object.h}
+                h={object.h}
                   isDisabled={this.state.enabled}
                   onPress = {() => {
-                    if(this.state.enabled === true){
-                    this.setState({
-                        content: this.state.content + object.value,
-                      })
+                      if (this.state.enabled === true) {
+                          if (capsLock) {
+                              this.setState({
+                                  content: this.state.content + object.value
+                              })
+                          } else {
+                              this.setState({
+                                  content: this.state.content + object.value.toLowerCase()
+                              })
+                              
+                          }
                     }
                     ReactNativeHapticFeedback.trigger("impactLight", options);
 
@@ -270,6 +281,7 @@ export default class MainView extends React.Component {
                     style={{
                       width: '100%',
                       height: '100%',
+                     
                       backgroundColor: object.backgroundColor,
                       borderWidth:2,
                       borderColor:'white',
@@ -301,8 +313,8 @@ const styles = StyleSheet.create({
   header:{
     flexDirection:"row",
     justifyContent:"space-between",
-    alignItems:"center",
-    backgroundColor:"#1a1a1a",
+        alignItems: "center",
+        backgroundColor:'#1a1a1a' ,
   },
 
    button: {
