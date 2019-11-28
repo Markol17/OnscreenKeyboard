@@ -19,6 +19,7 @@ import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
 capsLock = false;
+shift = false;
 
 //haptic feedback options
 const options = {
@@ -151,8 +152,9 @@ export default class MainView extends React.Component {
                     h={object.h}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
-                      console.log("Shift")
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
+						console.log("Shift")
+						ReactNativeHapticFeedback.trigger("impactLight", options);
+						shift = true;
                     }}
 
                     connectors={['tl','tr','c','br','bl']}>
@@ -225,28 +227,13 @@ export default class MainView extends React.Component {
                     onPress = {() => {
                       console.log("Caps")
                       capsLock = !capsLock
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
-
+                      ReactNativeHapticFeedback.trigger("impactLight", options)
                     }}
 
                     connectors={['tl','tr','c','br','bl']}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: object.backgroundColor,
-                        borderWidth:2,
-                        borderColor:'white',
-                        borderRadius:4,
-                        flex: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-
-                      }}>
-                      <Text style={{
-                        fontSize: object.fontSize,
-                        color:object.textColor,
-                      }}>{object.value}</Text>
+                 <View
+                     style={capsViewStyle(object)}>
+                      <Text style={capsTextStyle(object)}>{object.value}</Text>
                       </View>
                   </DragResizeBlock>
          )
@@ -260,11 +247,14 @@ export default class MainView extends React.Component {
                 h={object.h}
                   isDisabled={this.state.enabled}
                   onPress = {() => {
-                      if (this.state.enabled === true) {
-                          if (capsLock) {
+					  if (this.state.enabled === true) {
+						  if (capsLock || shift) {
                               this.setState({
-                                  content: this.state.content + object.value
-                              })
+                                  content: this.state.content + object.value,
+							  })
+							  if (shift) {
+								  shift = false;
+							  }
                           } else {
                               this.setState({
                                   content: this.state.content + object.value.toLowerCase()
@@ -307,8 +297,53 @@ export default class MainView extends React.Component {
     </View>
     </View>
     );
-  }
+    }
 };
+
+
+capsViewStyle = function (object) {
+    if (capsLock) {
+        return {
+            width: '100%',
+            height: '100%',
+            backgroundColor: "white",
+            borderWidth: 2,
+            borderColor: 'white',
+            borderRadius: 4,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+        }
+    } else {
+        return {
+            width: '100%',
+            height: '100%',
+            backgroundColor: object.backgroundColor,
+            borderWidth: 2,
+            borderColor: "white",
+            borderRadius: 4,
+            flex: 1,
+            alignItems: "center",
+            justifyContent: "center",
+        }
+    }
+};
+
+capsTextStyle = function (object) {
+    if (capsLock) {
+        return {
+            fontSize: object.fontSize,
+            color: "#1a1a1a",
+        }
+    } else {
+        return {
+            fontSize: object.fontSize,
+            color: object.textColor,
+        }
+        
+    }
+};
+
 const styles = StyleSheet.create({
   header:{
     flexDirection:"row",
