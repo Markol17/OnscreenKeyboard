@@ -107,6 +107,7 @@ export default class EditViewController extends Component {
         content={editViewControlPanel}
         styles={drawerStyles}
         disabled={this.state.disabled}
+        negotiatePan={true}
         // tweenHandler={this.tweenHandler.bind(this)}
         // tweenDuration={this.state.tweenDuration}
         // tweenEasing={this.state.tweenEasing}
