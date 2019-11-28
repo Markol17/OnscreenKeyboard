@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "16.9.0",
     "react-native": "0.61.1",
-    "react-native-drag-resize": "^1.0.2",
+    "react-native-drag-resize": "git+https://github.com/Markol17/react-native-drag-resize.git",
     "react-native-drawer": "^2.5.1",
     "react-native-drop-down-item": "^1.1.0",
     "react-native-flash-message": "^0.1.15",
@@ -22,7 +22,8 @@
     "react-native-screens": "^2.0.0-alpha.6",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^4.0.10",
-    "react-navigation-stack": "^1.10.3"
+    "react-navigation-stack": "^1.10.3",
+    "firebase": "^7.5.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
