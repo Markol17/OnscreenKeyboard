@@ -52,7 +52,11 @@ export default class EditViewController extends Component {
       data:[],
     };
   }
-
+componentWillMount(){
+  this.setState({
+    data: this.props.navigation.getParam("data", [])
+  })
+}
 
   //animation handler to make different animations (requires extra file)
   // tweenHandler(ratio){
@@ -90,6 +94,7 @@ export default class EditViewController extends Component {
         this.drawer.open();
       }}
       data={this.state.data}
+        enabled={false}
     />
     return (
 

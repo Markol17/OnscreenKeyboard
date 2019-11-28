@@ -158,7 +158,10 @@ export default class EditViewController extends Component {
             this.drawer.close();
         }}
         goToEdit={() => {
-            this.props.navigation.navigate("Edit")
+            this.props.navigation.navigate("Edit", {
+              data: this.state.data
+            })
+            console.log(this.state.data)
 
         }}
         goToSettings={() => {
@@ -194,6 +197,7 @@ export default class EditViewController extends Component {
           });
 
       }}
+      enabled={true}
       data={this.state.data}
     />
     return (

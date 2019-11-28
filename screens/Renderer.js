@@ -36,7 +36,7 @@ export default class MainView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      enabled: true,
+      enabled: this.props.enabled,
       content: "",
       capsLock: false,
       shift:false,
