@@ -30,20 +30,12 @@ import { showMessage, hideMessage } from "react-native-flash-message";
 import * as firebase from 'firebase';
 // import tweens from './tweens';
 
-const config = {
-  apiKey: "AIzaSyBKXeSg3Jx1tNXckG8k3gIjQnFkR_dIEck",
-  authDomain: "on-screen-keyboard.firebaseapp.com",
-  databaseURL: "https://on-screen-keyboard.firebaseio.com",
-  projectId: "on-screen-keyboard",
-  storageBucket: "on-screen-keyboard.appspot.com",
-  messagingSenderId: "436720630821",
-  appId: "1:436720630821:web:261dfd19b98fdf6c8713cc",
-  measurementId: "G-H144GX2E2B"
-};
+
 
 const { width } = Dimensions.get("window");
 const exportTo = ["google", "email"]
 //const ref = new DataController;
+
 export default class EditViewController extends Component {
 
   constructor(props) {
@@ -70,15 +62,13 @@ export default class EditViewController extends Component {
       data: [],
       presets:[],
     };
-    if (!firebase.apps.length) {
-       firebase.initializeApp(config);
-    }
 
   }
   //component is a deprecated method should update in the future
   componentWillMount(){
     this.get("Default")
     this.getAll()
+
   }
   componentDidUpdate(){
     if(this.state.data.length != 0){
@@ -133,6 +123,7 @@ export default class EditViewController extends Component {
 
    }
 
+
   //animation handler to make different animations (requires extra file)
   // tweenHandler(ratio){
   //   if(!this.state.tweenHandlerPreset){ return {} }
@@ -161,7 +152,7 @@ export default class EditViewController extends Component {
             this.props.navigation.navigate("Edit", {
               data: this.state.data
             })
-            console.log(this.state.data)
+
 
         }}
         goToSettings={() => {
