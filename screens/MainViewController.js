@@ -90,10 +90,11 @@ export default class EditViewController extends Component {
   }
   //db custom methods
   getAll(){
-    const previous = this.state.presets
+
     firebase.database().ref().on("value", (data) => {
       //javascript can be really weird sometimes. Having a for loop here wont affect the performances thaqt much since theres a small amount of items
       const output = Object.keys(data.val())
+      const previous = []
       for(let i=0; i<output.length; i++){
         previous.push(output[i])
       }
