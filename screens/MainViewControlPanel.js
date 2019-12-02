@@ -32,9 +32,9 @@ export default class EditViewControlPanel extends Component {
         </View>
         <ScrollView>
           <View style={styles.menuItems}>
-            <DropDown type="presets" name="Presets" data={this.props.presets} passPresetName={(presetName) => this.props.returnedPreset(presetName)}/>
+            <DropDown  name="Presets" data={this.props.presets} passPresetName={(presetName) => this.props.returnedPreset(presetName)}/>
             <View style={styles.bar}></View>
-            <DropDown type="exportTo" name="Export to" data={this.props.exports} passPresetName={(exportName) => this.props.returnedExport(exportName)}/>
+            <DropDown  name="Export to" data={this.props.exports} passPresetName={(exportName) => this.props.returnedExport(exportName)}/>
             <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}

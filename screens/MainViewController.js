@@ -21,7 +21,7 @@ const drawerStyles = {
 
 import Drawer from 'react-native-drawer';
 
-import Renderer from './Renderer';
+import Renderer from './MainViewRenderer';
 import MainViewControlPanel from './MainViewControlPanel';
 
 import FlashMessage from "react-native-flash-message";
@@ -41,26 +41,28 @@ export default class EditViewController extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      //anmiations stuff
+      // tweenHandlerOn: false, animation stuff to make different animations (requires extra file)
+      // tweenDuration: 350, animation to make different animations (requires extra file)
+      // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
       drawerType: 'overlay',
       openDrawerOffset: (width / 2) + (width / 6),
       closedDrawerOffset:0,
       relativeDrag: false,
       panThreshold: .15,
-
-      // tweenHandlerOn: false, animation stuff to make different animations (requires extra file)
-      // tweenDuration: 350, animation to make different animations (requires extra file)
-      // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
-
       disabled: false,
       tweenHandlerPreset: null,
       acceptDoubleTap: false,
       acceptTap: false,
       acceptPan: true,
-      tapToClose: false,
+      tapToClose: true,
       negotiatePan: true,
       side: "left",
+
       data: [],
       presets:[],
+
+
     };
 
   }
@@ -68,16 +70,16 @@ export default class EditViewController extends Component {
   componentWillMount(){
     this.get("Default")
     this.getAll()
-
   }
-  componentDidUpdate(){
-    if(this.state.data.length != 0){
+  componentDidUpdate(prevProps, prevState){
+    if(this.state.data.length != 0 && prevState.data != this.state.data){
       showMessage({
         message: "Success",
         description:"Preset loaded succesfully!",
         type: "success",
       });
     }
+
   }
   componentDidMount(){
     if(this.state.data.length === 0){
@@ -112,6 +114,7 @@ export default class EditViewController extends Component {
     })
   }
 
+
   //should go in editviewcontrol
   push(name, content){
     firebase.database().ref(name).set(
@@ -124,27 +127,15 @@ export default class EditViewController extends Component {
 
    }
 
-
   //animation handler to make different animations (requires extra file)
   // tweenHandler(ratio){
   //   if(!this.state.tweenHandlerPreset){ return {} }
   //   return tweens[this.state.tweenHandlerPreset](ratio)
   // }
 
-  //useless shit (just keeping this there cuz it may be usefull. i dont know)
-  // noopChange(){
-  //   this.setState({
-  //     changeVal: Math.random()
-  //   })
-  // }
-
-  //some other random ass shit (just keeping this there cuz it may be usefull. i dont know)
-  // setStateFrag(frag) {
-  //   this.setState(frag);
-  // }
-
 
   render() {
+
     const mainViewControlPanel = <MainViewControlPanel
         closeDrawer={() => {
             this.drawer.close();
@@ -161,7 +152,7 @@ export default class EditViewController extends Component {
         }}
 
         returnedPreset={(presetName) =>{
-              this.get(presetName);
+            this.get(presetName);
         }}
         returnedExport={(exportName) =>{
           console.log(exportName)
@@ -170,6 +161,7 @@ export default class EditViewController extends Component {
         exports={exportTo}
         presets={this.state.presets}
     />
+
     const renderer = <Renderer
       openDrawer={() => {
         this.drawer.open();
@@ -189,8 +181,9 @@ export default class EditViewController extends Component {
           });
 
       }}
-      enabled={true}
+      exportTo={this.state.exportName}
       data={this.state.data}
+        enabled={true}
     />
     return (
       <View style={{height:"100%", height:"100%"}}>

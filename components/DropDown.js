@@ -21,14 +21,9 @@ export default class DropDown extends Component {
 
   render() {
     let icon;
-    if(this.props.type === "presets"){
+    if(this.props.name === "Presets"){
       icon = <Icon1 style={styles.icon} name="keyboard-o" size={32}  color={"white"}/>
-    }else if(this.props.type === "exportTo"){
-
-
-
-
-    }else{
+    }else if(this.props.name === "Options"){
       icon = <Icon2 style={styles.icon} name="md-options" size={32}  color={"white"}/>
     }
     return(
@@ -67,7 +62,7 @@ export default class DropDown extends Component {
                 outlineVertical = styles.outlineVertical1
                 outlineHorizontal = styles.outlineHorizontal1
               }
-              if(this.props.type === "presets"){
+              if(this.props.name === "Presets"){
                 item = (
                    <TouchableOpacity
                      style={styles.menuButton}
@@ -80,7 +75,7 @@ export default class DropDown extends Component {
                      <Text style={styles.text1}>{object}</Text>
                    </TouchableOpacity >
                  )
-              }else if(this.props.type === "exportTo"){
+              }else if(this.props.name === "Export to"){
                 item = (
                    <TouchableOpacity
                      style={styles.menuButton}

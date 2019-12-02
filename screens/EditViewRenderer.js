@@ -6,7 +6,7 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
-
+  Linking,
 } from 'react-native';
 
 
@@ -36,11 +36,15 @@ export default class MainView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      enabled: this.props.enabled,
+      enabled: true,
       content: "",
       capsLock: false,
       shift:false,
+
     };
+  }
+  componentWillReceiveProps(){
+    this.exportTo(this.props.exportTo)
   }
   capsViewStyle(object) {
       if (this.state.capsLock) {
@@ -126,6 +130,21 @@ export default class MainView extends React.Component {
 
       }
   }
+  exportTo(exportName){
+    console.log(this.state.content)
+    if(exportName === "google"){
+      Linking.openURL("https://google.com/search?q="+this.state.content).catch(err =>
+         showMessage({
+          message: "Error",
+          description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
+          type: "danger",
+        }));
+    }
+    else if(exportName === "email"){
+      console.log(exportName)
+    }
+
+  }
   render() {
 
     return (
@@ -159,6 +178,7 @@ export default class MainView extends React.Component {
                     y={object.y}
                     w={object.w}
                     h={object.h}
+                    key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
                       if(this.state.enabled === true){
@@ -199,6 +219,7 @@ export default class MainView extends React.Component {
                     y={object.y}
                     w={object.w}
                     h={object.h}
+                    key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
                       if(this.state.enabled === true){
@@ -234,6 +255,7 @@ export default class MainView extends React.Component {
                     y={object.y}
                     w={object.w}
                     h={object.h}
+                    key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
 
@@ -259,6 +281,7 @@ export default class MainView extends React.Component {
                     y={object.y}
                     w={object.w}
                     h={object.h}
+                    key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
                       console.log("Modal")
@@ -295,6 +318,7 @@ export default class MainView extends React.Component {
                     y={object.y}
                     w={object.w}
                     h={object.h}
+                    key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
                       this.setState({
@@ -318,25 +342,27 @@ export default class MainView extends React.Component {
                   x={object.x}
                   y={object.y}
                   w={object.w}
-                h={object.h}
-                  isDisabled={this.state.enabled}
+                  h={object.h}
+                  key={index}
+                  isDisabled={this.props.enabled}
                   onPress = {() => {
-					  if (this.state.enabled === true) {
-						  if (this.state.capsLock || this.state.shift) {
-                              this.setState({
-                                  content: this.state.content + object.value,
-							  })
-							  if (this.state.shift) {
-								  this.setState({
-                    shift:false
-                  })
-							  }
-                          } else {
-                              this.setState({
-                                  content: this.state.content + object.value.toLowerCase()
-                              })
 
-                          }
+        					  if (this.state.enabled === true) {
+        						  if (this.state.capsLock || this.state.shift) {
+                        this.setState({
+                          content: this.state.content + object.value,
+        							  })
+        							  if (this.state.shift) {
+        								  this.setState({
+                            shift:false
+                          })
+        							  }
+                      }
+                      else {
+                        this.setState({
+                          content: this.state.content + object.value.toLowerCase()
+                        })
+                      }
                     }
                     ReactNativeHapticFeedback.trigger("impactLight", options);
 
@@ -415,6 +441,7 @@ const styles = StyleSheet.create({
    },
    //container for the keyboard
    container:{
+     alignItems:"center",
      height:"100%",
      backgroundColor:"#1a1a1a",
    },

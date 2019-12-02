@@ -19,7 +19,7 @@ const drawerStyles = {
 }
 
 import Drawer from 'react-native-drawer';
-import Renderer from './Renderer';
+import Renderer from './EditViewRenderer';
 import EditViewControlPanel from './EditViewControlPanel'
 
 
@@ -64,22 +64,6 @@ componentWillMount(){
   //   return tweens[this.state.tweenHandlerPreset](ratio)
   // }
 
-  //useless shit
-  // noopChange(){
-  //   this.setState({
-  //     changeVal: Math.random()
-  //   })
-  // }
-
-  // openDrawer(){
-  //   this.drawer.open()
-  // }
-
-  //no clue wtf this is
-  // setStateFrag(frag) {
-  //   this.setState(frag);
-  // }
-
   render() {
     const editViewControlPanel = <EditViewControlPanel
       closeDrawer={() => {
@@ -94,7 +78,7 @@ componentWillMount(){
         this.drawer.open();
       }}
       data={this.state.data}
-        enabled={false}
+      enabled={false}
     />
     return (
 
