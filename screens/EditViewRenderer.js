@@ -344,7 +344,7 @@ export default class MainView extends React.Component {
                   w={object.w}
                   h={object.h}
                   key={index}
-                  isDisabled={this.props.enabled}
+                  isDisabled={object.isDisabled}
                   onPress = {() => {
 
         					  if (this.state.enabled === true) {

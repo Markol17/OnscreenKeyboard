@@ -43,9 +43,9 @@ export default class MainView extends React.Component {
 
     };
   }
-  componentWillReceiveProps(){
-    this.exportTo(this.props.exportTo)
-  }
+  // componentWillReceiveProps(){
+  //   this.exportTo(this.props.exportTo)
+  // }
   capsViewStyle(object) {
       if (this.state.capsLock) {
           return {

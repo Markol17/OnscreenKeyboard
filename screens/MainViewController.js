@@ -83,12 +83,12 @@ export default class EditViewController extends Component {
   }
   componentDidMount(){
     if(this.state.data.length === 0){
-    showMessage({
-      message: "Error",
-      description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
-      type: "danger",
-    });
-  }
+      showMessage({
+        message: "Error",
+        description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
+        type: "danger",
+      });
+    }
   }
   //db custom methods
   getAll(){
