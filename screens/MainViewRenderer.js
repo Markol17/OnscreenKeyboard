@@ -18,7 +18,7 @@ import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 
 const width = Dimensions.get("window").width;
 const height = Dimensions.get("window").height;
-
+console.log(width, height)
 
 //haptic feedback options
 const options = {
@@ -46,6 +46,7 @@ export default class MainView extends React.Component {
   // componentWillReceiveProps(){
   //   this.exportTo(this.props.exportTo)
   // }
+
   capsViewStyle(object) {
       if (this.state.capsLock) {
           return {
@@ -74,10 +75,10 @@ export default class MainView extends React.Component {
       }
   }
 
-  capsTextStyle(object) {
+  capsTextStyle(object, fontSize) {
       if (this.state.capsLock) {
           return {
-              fontSize: object.fontSize,
+              fontSize: fontSize,
               color: "#1a1a1a",
           }
       } else {
@@ -116,15 +117,15 @@ export default class MainView extends React.Component {
       }
   }
 
-  shiftTextStyle(object) {
+  shiftTextStyle(object, fontSize) {
       if (this.state.shift) {
           return {
-              fontSize: object.fontSize,
+              fontSize: fontSize,
               color: "#1a1a1a",
           }
       } else {
           return {
-              fontSize: object.fontSize,
+              fontSize: fontSize,
               color: object.textColor,
           }
 
@@ -145,6 +146,7 @@ export default class MainView extends React.Component {
     }
 
   }
+
   render() {
 
     return (
@@ -170,14 +172,23 @@ export default class MainView extends React.Component {
       >
      {this.props.data.map((object, index) => {
 
+       //calculates the best ratio for the screen size
+       let ratio = (width/height)-0.99
+
+       let resizedX = object.x*ratio
+       let resizedY = object.y*ratio
+       let resizedWidth = object.w*ratio
+       let resizedHeight = object.h*ratio
+       let resizedFont = object.fontSize*ratio
+
        let item = "Error";
        if(object.value === "Del"){
          item = (
                   <DragResizeBlock
-                    x={object.x}
-                    y={object.y}
-                    w={object.w}
-                    h={object.h}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
@@ -205,7 +216,7 @@ export default class MainView extends React.Component {
 
                       }}>
                       <Text style={{
-                        fontSize: object.fontSize,
+                        fontSize: resizedFont,
                         color:object.textColor,
                       }}>{object.value}</Text>
                       </View>
@@ -215,10 +226,10 @@ export default class MainView extends React.Component {
        else if (object.value === "Space" ) {
          item = (
                   <DragResizeBlock
-                    x={object.x}
-                    y={object.y}
-                    w={object.w}
-                    h={object.h}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
@@ -251,10 +262,10 @@ export default class MainView extends React.Component {
        else if (object.value === "Shift"){
          item = (
                   <DragResizeBlock
-                    x={object.x}
-                    y={object.y}
-                    w={object.w}
-                    h={object.h}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
@@ -268,7 +279,7 @@ export default class MainView extends React.Component {
                     connectors={['tl','tr','c','br','bl']}>
                     <View
                         style={this.shiftViewStyle(object)}>
-                         <Text style={this.shiftTextStyle(object)}>{object.value}</Text>
+                         <Text style={this.shiftTextStyle(object, resizedFont)}>{object.value}</Text>
                          </View>
                   </DragResizeBlock>
          )
@@ -277,10 +288,10 @@ export default class MainView extends React.Component {
        else if(object.value === "Modal") {
          item = (
                   <DragResizeBlock
-                    x={object.x}
-                    y={object.y}
-                    w={object.w}
-                    h={object.h}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
@@ -303,7 +314,7 @@ export default class MainView extends React.Component {
 
                       }}>
                       <Text style={{
-                        fontSize: object.fontSize,
+                        fontSize: resizedFont,
                         color:object.textColor,
                       }}>?123</Text>
                       </View>
@@ -314,10 +325,10 @@ export default class MainView extends React.Component {
        else if(object.value === "Caps"){
          item = (
                   <DragResizeBlock
-                    x={object.x}
-                    y={object.y}
-                    w={object.w}
-                    h={object.h}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
                     onPress = {() => {
@@ -331,7 +342,7 @@ export default class MainView extends React.Component {
                     connectors={['tl','tr','c','br','bl']}>
                  <View
                      style={this.capsViewStyle(object)}>
-                      <Text style={this.capsTextStyle(object)}>{object.value}</Text>
+                      <Text style={this.capsTextStyle(object, resizedFont)}>{object.value}</Text>
                       </View>
                   </DragResizeBlock>
          )
@@ -339,10 +350,10 @@ export default class MainView extends React.Component {
        else{
 
             item =( <DragResizeBlock
-                  x={object.x}
-                  y={object.y}
-                  w={object.w}
-                  h={object.h}
+                  x={resizedX}
+                  y={resizedY}
+                  w={resizedWidth}
+                  h={resizedHeight}
                   key={index}
                   isDisabled={this.props.enabled}
                   onPress = {() => {
@@ -384,7 +395,7 @@ export default class MainView extends React.Component {
 
                     }}>
                     <Text style={{
-                      fontSize: object.fontSize,
+                      fontSize: resizedFont,
                       color:object.textColor,
                     }}>{object.value}</Text>
                     </View>
