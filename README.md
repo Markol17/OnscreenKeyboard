@@ -1,5 +1,5 @@
 # On-screen Keyboard
-On-screen keyboard app for SVH
+On-screen keyboard app 
 
 ## Install dependencies
 
