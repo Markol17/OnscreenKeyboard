@@ -1,5 +1,5 @@
 # On-screen Keyboard
-On-screen keyboard app for SVH
+On-screen keyboard app 
 
 ## Install dependencies
 
@@ -13,7 +13,5 @@ Android: ``` react-native run-android ```
 
 ## Contributors
 
-Kelvin Phan <br/>
-Joshua Lai <br/>
 Mark-Olivier Poulin <br/>
 Ara Kirijian
