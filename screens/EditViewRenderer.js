@@ -9,21 +9,19 @@ import {
   Linking,
 } from 'react-native';
 
-
 import Button from '../components/OpenCloseButton';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import {DragResizeBlock, DragResizeContainer,} from 'react-native-drag-resize';
-import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+import { DragResizeBlock, DragResizeContainer } from 'react-native-drag-resize';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 
-const width = Dimensions.get("window").width;
-const height = Dimensions.get("window").height;
-
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 //haptic feedback options
 const options = {
   enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: true
+  ignoreAndroidSystemSettings: true,
 };
 //
 // <TouchableOpacity
@@ -31,432 +29,419 @@ const options = {
 //   <Icon2 name="md-clipboard" size={25}  color={"white"}/>
 // </TouchableOpacity >
 
-
 export default class MainView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       enabled: true,
-      content: "",
+      content: '',
       capsLock: false,
-      shift:false,
-
+      shift: false,
     };
   }
-  componentWillReceiveProps(){
-    this.exportTo(this.props.exportTo)
+  componentWillReceiveProps() {
+    this.exportTo(this.props.exportTo);
   }
   capsViewStyle(object) {
-      if (this.state.capsLock) {
-          return {
-              width: '100%',
-              height: '100%',
-              backgroundColor: "white",
-              borderWidth: 2,
-              borderColor: 'white',
-              borderRadius: 4,
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-          }
-      } else {
-          return {
-              width: '100%',
-              height: '100%',
-              backgroundColor: object.backgroundColor,
-              borderWidth: 2,
-              borderColor: "white",
-              borderRadius: 4,
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-          }
-      }
+    if (this.state.capsLock) {
+      return {
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 4,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+    } else {
+      return {
+        width: '100%',
+        height: '100%',
+        backgroundColor: object.backgroundColor,
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 4,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+    }
   }
 
   capsTextStyle(object, fontSize) {
-      if (this.state.capsLock) {
-          return {
-              fontSize: fontSize,
-              color: "#1a1a1a",
-          }
-      } else {
-          return {
-              fontSize: fontSize,
-              color: object.textColor,
-          }
-
-      }
+    if (this.state.capsLock) {
+      return {
+        fontSize: fontSize,
+        color: '#1a1a1a',
+      };
+    } else {
+      return {
+        fontSize: fontSize,
+        color: object.textColor,
+      };
+    }
   }
   shiftViewStyle(object) {
-      if (this.state.shift) {
-          return {
-              width: '100%',
-              height: '100%',
-              backgroundColor: "white",
-              borderWidth: 2,
-              borderColor: 'white',
-              borderRadius: 4,
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-          }
-      } else {
-          return {
-              width: '100%',
-              height: '100%',
-              backgroundColor: object.backgroundColor,
-              borderWidth: 2,
-              borderColor: "white",
-              borderRadius: 4,
-              flex: 1,
-              alignItems: "center",
-              justifyContent: "center",
-          }
-      }
+    if (this.state.shift) {
+      return {
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'white',
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 4,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+    } else {
+      return {
+        width: '100%',
+        height: '100%',
+        backgroundColor: object.backgroundColor,
+        borderWidth: 2,
+        borderColor: 'white',
+        borderRadius: 4,
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      };
+    }
   }
 
   shiftTextStyle(object, fontSize) {
-      if (this.state.shift) {
-          return {
-              fontSize: fontSize,
-              color: "#1a1a1a",
-          }
-      } else {
-          return {
-              fontSize: fontSize,
-              color: object.textColor,
-          }
-
-      }
+    if (this.state.shift) {
+      return {
+        fontSize: fontSize,
+        color: '#1a1a1a',
+      };
+    } else {
+      return {
+        fontSize: fontSize,
+        color: object.textColor,
+      };
+    }
   }
-  exportTo(exportName){
-    console.log(this.state.content)
-    if(exportName === "google"){
-      Linking.openURL("https://google.com/search?q="+this.state.content).catch(err =>
-         showMessage({
-          message: "Error",
-          description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
-          type: "danger",
-        }));
+  exportTo(exportName) {
+    console.log(this.state.content);
+    if (exportName === 'google') {
+      Linking.openURL(
+        'https://google.com/search?q=' + this.state.content,
+      ).catch(err =>
+        showMessage({
+          message: 'Error',
+          description:
+            'An error occured while trying to retrieve this preset. You may want to check your internet connection.',
+          type: 'danger',
+        }),
+      );
+    } else if (exportName === 'email') {
+      console.log(exportName);
     }
-    else if(exportName === "email"){
-      console.log(exportName)
-    }
-
   }
   render() {
-
     return (
-    <View>
-    <View style={styles.header}>
-      <Button
-      onPress={() => {
-        this.props.openDrawer();
-      }}
-        icon="open"
-        style={styles.button}
-      />
+      <View>
+        <View style={styles.header}>
+          <Button
+            onPress={() => {
+              this.props.openDrawer();
+            }}
+            icon="open"
+            style={styles.button}
+          />
 
-    <Text style={styles.textInput}>{this.state.content}</Text>
-    <TouchableOpacity style={styles.clipboard} onPress={() => {this.props.copyToClipboard(this.state.content)}}><Icon name="md-clipboard" size={25}  color={"white"}/></TouchableOpacity>
-    </View>
-    <View style={styles.container}>
-      <DragResizeContainer
-        style={styles.canvas}
-        onInit={() => {
-          return null
-        }}
-      >
-     {this.props.data.map((object, index) => {
+          <Text style={styles.textInput}>{this.state.content}</Text>
+          <TouchableOpacity
+            style={styles.clipboard}
+            onPress={() => {
+              this.props.copyToClipboard(this.state.content);
+            }}>
+            <Icon name="md-clipboard" size={25} color={'white'} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.container}>
+          <DragResizeContainer
+            style={styles.canvas}
+            onInit={() => {
+              return null;
+            }}>
+            {this.props.data.map((object, index) => {
+              //calculates the best ratio for the screen size
+              let ratio = width / height - 0.99;
 
-       //calculates the best ratio for the screen size
-       let ratio = (width/height)-0.99
+              let resizedX = object.x * ratio;
+              let resizedY = object.y * ratio;
+              let resizedWidth = object.w * ratio;
+              let resizedHeight = object.h * ratio;
+              let resizedFont = object.fontSize * ratio;
 
-       let resizedX = object.x*ratio
-       let resizedY = object.y*ratio
-       let resizedWidth = object.w*ratio
-       let resizedHeight = object.h*ratio
-       let resizedFont = object.fontSize*ratio
-
-       let item = "Error";
-       if(object.value === "Del"){
-         item = (
+              let item = 'Error';
+              if (object.value === 'Del') {
+                item = (
                   <DragResizeBlock
-                  x={resizedX}
-                  y={resizedY}
-                  w={resizedWidth}
-                  h={resizedHeight}
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
                     key={index}
                     isDisabled={this.state.enabled}
-                    onPress = {() => {
-                      if(this.state.enabled === true){
-                      this.setState({
+                    onPress={() => {
+                      if (this.state.enabled === true) {
+                        this.setState({
                           content: this.state.content.slice(0, -1),
-                        })
+                        });
                       }
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
                     }}
-
-
-                    connectors={['tl','tr','c','br','bl']}>
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
                     <View
                       style={{
                         width: '100%',
                         height: '100%',
                         backgroundColor: object.backgroundColor,
-                        borderWidth:2,
-                        borderColor:'white',
-                        borderRadius:4,
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        borderRadius: 4,
                         flex: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-
+                        alignItems: 'center',
+                        justifyContent: 'center',
                       }}>
-                      <Text style={{
-                        fontSize: resizedFont,
-                        color:object.textColor,
-                      }}>{object.value}</Text>
-                      </View>
-                  </DragResizeBlock>
-         )
-       }
-       else if (object.value === "Space" ) {
-         item = (
-                  <DragResizeBlock
-                  x={resizedX}
-                  y={resizedY}
-                  w={resizedWidth}
-                  h={resizedHeight}
-                    key={index}
-                    isDisabled={this.state.enabled}
-                    onPress = {() => {
-                      if(this.state.enabled === true){
-                      this.setState({
-                          content: this.state.content + " ",
-                        })
-                      }
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
-                    }}
-
-                    connectors={['tl','tr','c','br','bl']}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: object.backgroundColor,
-                        borderWidth:2,
-                        borderColor:'white',
-                        borderRadius:4,
-                        flex: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}>
-                      </View>
-                  </DragResizeBlock>
-         )
-
-       }
-       else if (object.value === "Shift"){
-         item = (
-                  <DragResizeBlock
-                  x={resizedX}
-                  y={resizedY}
-                  w={resizedWidth}
-                  h={resizedHeight}
-                    key={index}
-                    isDisabled={this.state.enabled}
-                    onPress = {() => {
-
-						ReactNativeHapticFeedback.trigger("impactLight", options);
-						this.setState({
-              shift:!this.state.shift
-            })
-                    }}
-
-                    connectors={['tl','tr','c','br','bl']}>
-                    <View
-                        style={this.shiftViewStyle(object)}>
-                         <Text style={this.shiftTextStyle(object, resizedFont)}>{object.value}</Text>
-                         </View>
-                  </DragResizeBlock>
-         )
-
-       }
-       else if(object.value === "Modal") {
-         item = (
-                  <DragResizeBlock
-                  x={resizedX}
-                  y={resizedY}
-                  w={resizedWidth}
-                  h={resizedHeight}
-                    key={index}
-                    isDisabled={this.state.enabled}
-                    onPress = {() => {
-                      console.log("Modal")
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
-                    }}
-
-                    connectors={['tl','tr','c','br','bl']}>
-                    <View
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        backgroundColor: object.backgroundColor,
-                        borderWidth:2,
-                        borderColor:'white',
-                        borderRadius:4,
-                        flex: 1,
-                        alignItems: "center",
-                        justifyContent: "center",
-
-                      }}>
-                      <Text style={{
-                        fontSize: resizedFont,
-                        color:object.textColor,
-                      }}>?123</Text>
-                      </View>
-                  </DragResizeBlock>
-         )
-
-       }
-       else if(object.value === "Caps"){
-         item = (
-                  <DragResizeBlock
-                  x={resizedX}
-                  y={resizedY}
-                  w={resizedWidth}
-                  h={resizedHeight}
-                    key={index}
-                    isDisabled={this.state.enabled}
-                    onPress = {() => {
-                      this.setState({
-                        capsLock: !this.state.capsLock
-                      })
-                      ReactNativeHapticFeedback.trigger("impactLight", options);
-
-                    }}
-
-                    connectors={['tl','tr','c','br','bl']}>
-                 <View
-                     style={this.capsViewStyle(object)}>
-                      <Text style={this.capsTextStyle(object, resizedFont)}>{object.value}</Text>
-                      </View>
-                  </DragResizeBlock>
-         )
-       }
-       else{
-
-            item =( <DragResizeBlock
-              x={resizedX}
-              y={resizedY}
-              w={resizedWidth}
-              h={resizedHeight}
-                  key={index}
-                  isDisabled={object.isDisabled}
-                  onPress = {() => {
-
-        					  if (this.state.enabled === true) {
-        						  if (this.state.capsLock || this.state.shift) {
-                        this.setState({
-                          content: this.state.content + object.value,
-        							  })
-        							  if (this.state.shift) {
-        								  this.setState({
-                            shift:false
-                          })
-        							  }
-                      }
-                      else {
-                        this.setState({
-                          content: this.state.content + object.value.toLowerCase()
-                        })
-                      }
-                    }
-                    ReactNativeHapticFeedback.trigger("impactLight", options);
-
-                  }}
-
-                  connectors={['tl','tr','c','br','bl']}>
-                  <View
-                    style={{
-                      width: '100%',
-                      height: '100%',
-
-                      backgroundColor: object.backgroundColor,
-                      borderWidth:2,
-                      borderColor:'white',
-                      borderRadius:4,
-                      flex: 1,
-                      alignItems: "center",
-                      justifyContent: "center",
-
-                    }}>
-                    <Text style={{
-                      fontSize: resizedFont,
-                      color:object.textColor,
-                    }}>{object.value}</Text>
+                      <Text
+                        style={{
+                          fontSize: resizedFont,
+                          color: object.textColor,
+                        }}>
+                        {object.value}
+                      </Text>
                     </View>
-                </DragResizeBlock>
-              )
-       }
-       return(
-         item
-       )
-      })}
-      </DragResizeContainer>
-    </View>
-    </View>
+                  </DragResizeBlock>
+                );
+              } else if (object.value === 'Space') {
+                item = (
+                  <DragResizeBlock
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
+                    key={index}
+                    isDisabled={this.state.enabled}
+                    onPress={() => {
+                      if (this.state.enabled === true) {
+                        this.setState({
+                          content: this.state.content + ' ',
+                        });
+                      }
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
+                    }}
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: object.backgroundColor,
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        borderRadius: 4,
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}></View>
+                  </DragResizeBlock>
+                );
+              } else if (object.value === 'Shift') {
+                item = (
+                  <DragResizeBlock
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
+                    key={index}
+                    isDisabled={this.state.enabled}
+                    onPress={() => {
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
+                      this.setState({
+                        shift: !this.state.shift,
+                      });
+                    }}
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
+                    <View style={this.shiftViewStyle(object)}>
+                      <Text style={this.shiftTextStyle(object, resizedFont)}>
+                        {object.value}
+                      </Text>
+                    </View>
+                  </DragResizeBlock>
+                );
+              } else if (object.value === 'Modal') {
+                item = (
+                  <DragResizeBlock
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
+                    key={index}
+                    isDisabled={this.state.enabled}
+                    onPress={() => {
+                      console.log('Modal');
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
+                    }}
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: object.backgroundColor,
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        borderRadius: 4,
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: resizedFont,
+                          color: object.textColor,
+                        }}>
+                        ?123
+                      </Text>
+                    </View>
+                  </DragResizeBlock>
+                );
+              } else if (object.value === 'Caps') {
+                item = (
+                  <DragResizeBlock
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
+                    key={index}
+                    isDisabled={this.state.enabled}
+                    onPress={() => {
+                      this.setState({
+                        capsLock: !this.state.capsLock,
+                      });
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
+                    }}
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
+                    <View style={this.capsViewStyle(object)}>
+                      <Text style={this.capsTextStyle(object, resizedFont)}>
+                        {object.value}
+                      </Text>
+                    </View>
+                  </DragResizeBlock>
+                );
+              } else {
+                item = (
+                  <DragResizeBlock
+                    x={resizedX}
+                    y={resizedY}
+                    w={resizedWidth}
+                    h={resizedHeight}
+                    key={index}
+                    isDisabled={object.isDisabled}
+                    onPress={() => {
+                      if (this.state.enabled === true) {
+                        if (this.state.capsLock || this.state.shift) {
+                          this.setState({
+                            content: this.state.content + object.value,
+                          });
+                          if (this.state.shift) {
+                            this.setState({
+                              shift: false,
+                            });
+                          }
+                        } else {
+                          this.setState({
+                            content:
+                              this.state.content + object.value.toLowerCase(),
+                          });
+                        }
+                      }
+                      ReactNativeHapticFeedback.trigger('impactLight', options);
+                    }}
+                    connectors={['tl', 'tr', 'c', 'br', 'bl']}>
+                    <View
+                      style={{
+                        width: '100%',
+                        height: '100%',
+
+                        backgroundColor: object.backgroundColor,
+                        borderWidth: 2,
+                        borderColor: 'white',
+                        borderRadius: 4,
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}>
+                      <Text
+                        style={{
+                          fontSize: resizedFont,
+                          color: object.textColor,
+                        }}>
+                        {object.value}
+                      </Text>
+                    </View>
+                  </DragResizeBlock>
+                );
+              }
+              return item;
+            })}
+          </DragResizeContainer>
+        </View>
+      </View>
     );
-    }
-};
+  }
+}
 
 const styles = StyleSheet.create({
-  header:{
-    flexDirection:"row",
-    justifyContent:"space-between",
-        alignItems: "center",
-        backgroundColor:'#1a1a1a' ,
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#1a1a1a',
   },
 
-   button: {
-    width:40,
+  button: {
+    width: 40,
     marginLeft: 7,
-   },
+  },
 
-   textInput:{
-     //backgroundColor:"#f7f7f7",
-     color:"white",
-     width: width-125,//55
-     height:40,
-     marginRight:1,
-     borderWidth:2,
-     borderRadius:4,
-     borderColor:"#f5a638",//#f5a638
-     fontSize:22,
-     padding:2,
-     paddingLeft:8,
-     //padding:5,
-   },
-   clipboard:{
-     width:50,
-     height:40,
-     marginRight:7,
-     borderColor:"#f5a638",
-     borderRadius:4,
-     borderWidth:2,
-     alignItems:"center",
-     justifyContent:"center",
-   },
-   //container for the keyboard
-   container:{
-     alignItems:"center",
-     height:"100%",
-     backgroundColor:"#1a1a1a",
-   },
-   canvas:{
-     width:width,
-     height:height-41.5,
+  textInput: {
+    //backgroundColor:"#f7f7f7",
+    color: 'white',
+    width: width - 125, //55
+    height: 40,
+    marginRight: 1,
+    borderWidth: 2,
+    borderRadius: 4,
+    borderColor: '#f5a638', //#f5a638
+    fontSize: 22,
+    padding: 2,
+    paddingLeft: 8,
+    //padding:5,
+  },
+  clipboard: {
+    width: 50,
+    height: 40,
+    marginRight: 7,
+    borderColor: '#f5a638',
+    borderRadius: 4,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  //container for the keyboard
+  container: {
+    alignItems: 'center',
+    height: '100%',
+    backgroundColor: '#1a1a1a',
+  },
+  canvas: {
+    width: width,
+    height: height - 41.5,
     //backgroundColor:"red",
-   },
-})
+  },
+});

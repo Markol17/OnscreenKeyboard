@@ -3,41 +3,32 @@
  * https://github.com/facebook/react-native
  */
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Text,
-  View,
-  Dimensions,
-  Clipboard,
-} from 'react-native';
+import { AppRegistry, Text, View, Dimensions, Clipboard } from 'react-native';
 
 const drawerStyles = {
   drawer: {
-    shadowColor: "#000000",
+    shadowColor: '#000000',
     shadowOpacity: 0.8,
     shadowRadius: 0,
-  }
-}
+  },
+};
 
 import Drawer from 'react-native-drawer';
 
 import Renderer from './MainViewRenderer';
 import MainViewControlPanel from './MainViewControlPanel';
 
-import FlashMessage from "react-native-flash-message";
-import { showMessage, hideMessage } from "react-native-flash-message";
+import FlashMessage from 'react-native-flash-message';
+import { showMessage, hideMessage } from 'react-native-flash-message';
 
 import * as firebase from 'firebase';
 // import tweens from './tweens';
 
-
-
-const { width } = Dimensions.get("window");
-const exportTo = ["google", "email"]
+const { width } = Dimensions.get('window');
+const exportTo = ['google', 'email'];
 //const ref = new DataController;
 
 export default class EditViewController extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -46,10 +37,10 @@ export default class EditViewController extends Component {
       // tweenDuration: 350, animation to make different animations (requires extra file)
       // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
       drawerType: 'overlay',
-      openDrawerOffset: (width / 2) + (width / 6),
-      closedDrawerOffset:0,
+      openDrawerOffset: width / 2 + width / 6,
+      closedDrawerOffset: 0,
       relativeDrag: false,
-      panThreshold: .15,
+      panThreshold: 0.15,
       disabled: false,
       tweenHandlerPreset: null,
       acceptDoubleTap: false,
@@ -57,69 +48,77 @@ export default class EditViewController extends Component {
       acceptPan: true,
       tapToClose: true,
       negotiatePan: true,
-      side: "left",
+      side: 'left',
 
       data: [],
-      presets:[],
+      presets: [],
     };
-
   }
   //component is a deprecated method should update in the future
-  componentWillMount(){
-    this.get("Default")
-    this.getAll()
+  componentWillMount() {
+    this.get('Default');
+    this.getAll();
   }
-  componentDidUpdate(prevProps, prevState){
-    if(this.state.data.length != 0 && prevState.data != this.state.data){
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.data.length != 0 && prevState.data != this.state.data) {
       showMessage({
-        message: "Success",
-        description:"Preset loaded succesfully!",
-        type: "success",
+        message: 'Success',
+        description: 'Preset loaded succesfully!',
+        type: 'success',
       });
     }
-
   }
-  componentDidMount(){
-    if(this.state.data.length === 0){
+  componentDidMount() {
+    if (this.state.data.length === 0) {
       showMessage({
-        message: "Error",
-        description:"An error occured while trying to retrieve this preset. You may want to check your internet connection.",
-        type: "danger",
+        message: 'Error',
+        description:
+          'An error occured while trying to retrieve this preset. You may want to check your internet connection.',
+        type: 'danger',
       });
     }
   }
   //db custom methods
-  getAll(){
-    firebase.database().ref().on("value", (data) => {
-      const output = Object.keys(data.val())
-      const previous = []
-      for(let i=0; i<output.length; i++){
-        previous.push(output[i])
-      }
+  getAll() {
+    firebase
+      .database()
+      .ref()
+      .on('value', data => {
+        const output = Object.keys(data.val());
+        const previous = [];
+        for (let i = 0; i < output.length; i++) {
+          previous.push(output[i]);
+        }
         this.setState({
-          presets: previous
-        })
-    })
+          presets: previous,
+        });
+      });
   }
 
-  get(name){
-    firebase.database().ref(name).on("value", (data) => {
+  get(name) {
+    firebase
+      .database()
+      .ref(name)
+      .on('value', data => {
         this.setState({
-          data: data.val()
-        })
-    })
+          data: data.val(),
+        });
+      });
   }
 
   //should go in editviewcontrol
-  push(name, content){
-    firebase.database().ref(name).set(
-      content
-    ).then(() => {
-      console.log("Inserted")
-    }).catch((error) => {
-       console.log(error)
-     });
-   }
+  push(name, content) {
+    firebase
+      .database()
+      .ref(name)
+      .set(content)
+      .then(() => {
+        console.log('Inserted');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
   //animation handler to make different animations (requires extra file)
   // tweenHandler(ratio){
@@ -127,87 +126,83 @@ export default class EditViewController extends Component {
   //   return tweens[this.state.tweenHandlerPreset](ratio)
   // }
 
-
   render() {
-
-    const mainViewControlPanel = <MainViewControlPanel
+    const mainViewControlPanel = (
+      <MainViewControlPanel
         closeDrawer={() => {
-            this.drawer.close();
+          this.drawer.close();
         }}
         goToEdit={() => {
-            this.props.navigation.navigate("Edit", {
-              data: this.state.data
-            })
-
-
+          this.props.navigation.navigate('Edit', {
+            data: this.state.data,
+          });
         }}
         goToSettings={() => {
-            this.props.navigation.navigate("Settings")
+          this.props.navigation.navigate('Settings');
         }}
-
-        returnedPreset={(presetName) =>{
-            this.get(presetName);
+        returnedPreset={presetName => {
+          this.get(presetName);
         }}
-        returnedExport={(exportName) =>{
-          console.log(exportName)
+        returnedExport={exportName => {
+          console.log(exportName);
         }}
-
         exports={exportTo}
         presets={this.state.presets}
-    />
+      />
+    );
 
-    const renderer = <Renderer
-      openDrawer={() => {
-        this.drawer.open();
-      }}
-      copyToClipboard={(string) =>{
+    const renderer = (
+      <Renderer
+        openDrawer={() => {
+          this.drawer.open();
+        }}
+        copyToClipboard={string => {
           Clipboard.setString(string);
-          let description = "There is nothing to copy!"
-          let message = "Error"
-          if(string.length != 0){
-            description = 'Copied "'+string+'" to clipboard succesfully!'
-            message = "Copied"
+          let description = 'There is nothing to copy!';
+          let message = 'Error';
+          if (string.length != 0) {
+            description = 'Copied "' + string + '" to clipboard succesfully!';
+            message = 'Copied';
           }
           showMessage({
             message: message,
-            description:description,
-            type: "info",
+            description: description,
+            type: 'info',
           });
-
-      }}
-      exportTo={this.state.exportName}
-      data={this.state.data}
-    />
+        }}
+        exportTo={this.state.exportName}
+        data={this.state.data}
+      />
+    );
     return (
-      <View style={{height:"100%", height:"100%"}}>
-      <Drawer
-        //open={true}
-        ref={c => this.drawer = c}
-        type={this.state.drawerType}
-        //animation={this.state.animation}
-        openDrawerOffset={this.state.openDrawerOffset}
-        closedDrawerOffset={this.state.closedDrawerOffset}
-        panOpenMask={this.state.panOpenMask}
-        panCloseMask={this.state.panCloseMask}
-        relativeDrag={this.state.relativeDrag}
-        panThreshold={this.state.panThreshold}
-        content={mainViewControlPanel}
-        styles={drawerStyles}
-        disabled={this.state.disabled}
-        negotiatePan={true}
-        // tweenHandler={this.tweenHandler.bind(this)}
-        // tweenDuration={this.state.tweenDuration}
-        // tweenEasing={this.state.tweenEasing}
-        // acceptDoubleTap={this.state.acceptDoubleTap}
-        acceptTap={this.state.acceptTap}
-        acceptPan={this.state.acceptPan}
-        tapToClose={this.state.tapToClose}
-        negotiatePan={this.state.negotiatePan}
-        side={this.state.side}
-        >
-        {renderer}
-      </Drawer>
-      <FlashMessage position="top" icon="auto" />
+      <View style={{ height: '100%', height: '100%' }}>
+        <Drawer
+          //open={true}
+          ref={c => (this.drawer = c)}
+          type={this.state.drawerType}
+          //animation={this.state.animation}
+          openDrawerOffset={this.state.openDrawerOffset}
+          closedDrawerOffset={this.state.closedDrawerOffset}
+          panOpenMask={this.state.panOpenMask}
+          panCloseMask={this.state.panCloseMask}
+          relativeDrag={this.state.relativeDrag}
+          panThreshold={this.state.panThreshold}
+          content={mainViewControlPanel}
+          styles={drawerStyles}
+          disabled={this.state.disabled}
+          negotiatePan={true}
+          // tweenHandler={this.tweenHandler.bind(this)}
+          // tweenDuration={this.state.tweenDuration}
+          // tweenEasing={this.state.tweenEasing}
+          // acceptDoubleTap={this.state.acceptDoubleTap}
+          acceptTap={this.state.acceptTap}
+          acceptPan={this.state.acceptPan}
+          tapToClose={this.state.tapToClose}
+          negotiatePan={this.state.negotiatePan}
+          side={this.state.side}>
+          {renderer}
+        </Drawer>
+        <FlashMessage position="top" icon="auto" />
       </View>
     );
   }
