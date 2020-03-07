@@ -61,8 +61,6 @@ export default class EditViewController extends Component {
 
       data: [],
       presets:[],
-
-
     };
 
   }
@@ -92,9 +90,7 @@ export default class EditViewController extends Component {
   }
   //db custom methods
   getAll(){
-
     firebase.database().ref().on("value", (data) => {
-      //javascript can be really weird sometimes. Having a for loop here wont affect the performances thaqt much since theres a small amount of items
       const output = Object.keys(data.val())
       const previous = []
       for(let i=0; i<output.length; i++){
@@ -114,7 +110,6 @@ export default class EditViewController extends Component {
     })
   }
 
-
   //should go in editviewcontrol
   push(name, content){
     firebase.database().ref(name).set(
@@ -124,7 +119,6 @@ export default class EditViewController extends Component {
     }).catch((error) => {
        console.log(error)
      });
-
    }
 
   //animation handler to make different animations (requires extra file)
@@ -183,7 +177,6 @@ export default class EditViewController extends Component {
       }}
       exportTo={this.state.exportName}
       data={this.state.data}
-        enabled={true}
     />
     return (
       <View style={{height:"100%", height:"100%"}}>

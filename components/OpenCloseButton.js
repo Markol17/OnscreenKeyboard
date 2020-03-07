@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
+  TouchableOpacity
 } from 'react-native';
 
 import Icon from 'react-native-vector-icons/SimpleLineIcons';

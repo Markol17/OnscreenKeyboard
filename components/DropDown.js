@@ -54,7 +54,6 @@ export default class DropDown extends Component {
         let outlineVertical = styles.outlineVertical1
         let outlineHorizontal = styles.outlineHorizontal1
 
-
               if(index === this.props.data.length-1){
                   outlineVertical = styles.outlineVertical2
                   outlineHorizontal = styles.outlineHorizontal2

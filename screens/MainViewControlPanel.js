@@ -18,13 +18,14 @@ import DropDown from '../components/DropDown';
 export default class EditViewControlPanel extends Component {
 
   render() {
+    const { closeDrawer, presets, returnedPreset, returnedExport, exports, goToEdit, goToSettings} = this.props;
     return (
       <View style={styles.controlPanel}>
         <View style={styles.header}>
           <Text style={styles.menu}>Main Menu</Text>
           <Button
             onPress={() => {
-              this.props.closeDrawer();
+              closeDrawer();
             }}
             icon="close"
             style={styles.closeButton}
@@ -32,20 +33,20 @@ export default class EditViewControlPanel extends Component {
         </View>
         <ScrollView>
           <View style={styles.menuItems}>
-            <DropDown  name="Presets" data={this.props.presets} passPresetName={(presetName) => this.props.returnedPreset(presetName)}/>
+            <DropDown  name="Presets" data={presets} passPresetName={(presetName) => returnedPreset(presetName)}/>
             <View style={styles.bar}></View>
-            <DropDown  name="Export to" data={this.props.exports} passPresetName={(exportName) => this.props.returnedExport(exportName)}/>
+            <DropDown  name="Export to" data={exports} passPresetName={(exportName) => returnedExport(exportName)}/>
             <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}
-              onPress={() => this.props.goToEdit()}>
+              onPress={() => goToEdit()}>
               <Text style={styles.text2}>Edit</Text>
               <Icon2 name="ios-arrow-forward" size={25}  color={"white"}/>
                     </TouchableOpacity >
                     <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}
-                        onPress={() => this.props.goToSettings()}>
+                        onPress={() => goToSettings()}>
                <Icon2 name="md-settings" size={30} color={"white"} />
               <Text style={styles.text1}>Settings</Text>
 
