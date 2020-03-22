@@ -10,9 +10,7 @@ export default class SpaceKey extends React.Component {
       options,
       hapticFeedback,
       index,
-      enabled,
-      setState,
-      content,
+      context,
     } = this.props;
     return (
       <DragResizeBlock
@@ -21,12 +19,10 @@ export default class SpaceKey extends React.Component {
         w={dimensions.resizedWidth}
         h={dimensions.resizedHeight}
         key={index}
-        isDisabled={enabled}
+        isDisabled={context.isEnabled}
         onPress={() => {
-          if (enabled === true) {
-            setState({
-              content: content + ' ',
-            });
+          if (context.isEnabled) {
+            context.setContent(context.content + ' ');
           }
           hapticFeedback('impactLight', options);
         }}

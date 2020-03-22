@@ -51,9 +51,7 @@ export default class ShiftKey extends React.Component {
       options,
       hapticFeedback,
       index,
-      enabled,
-      setState,
-      shift,
+      context,
     } = this.props;
     return (
       <DragResizeBlock
@@ -62,17 +60,19 @@ export default class ShiftKey extends React.Component {
         w={dimensions.resizedWidth}
         h={dimensions.resizedHeight}
         key={index}
-        isDisabled={enabled}
+        isDisabled={context.isEnabled}
         onPress={() => {
           hapticFeedback('impactLight', options);
-          setState({
-            shift: !shift,
-          });
+          context.setShift(!context.shift);
         }}
         connectors={['tl', 'tr', 'c', 'br', 'bl']}>
-        <View style={this.shiftViewStyle(keyData, shift)}>
+        <View style={this.shiftViewStyle(keyData, context.shift)}>
           <Text
-            style={this.shiftTextStyle(keyData, dimensions.resizedFont, shift)}>
+            style={this.shiftTextStyle(
+              keyData,
+              dimensions.resizedFont,
+              context.shift,
+            )}>
             {keyData.value}
           </Text>
         </View>

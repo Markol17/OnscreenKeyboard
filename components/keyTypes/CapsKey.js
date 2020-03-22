@@ -52,9 +52,7 @@ export default class CapsKey extends React.Component {
       options,
       hapticFeedback,
       index,
-      enabled,
-      setState,
-      capsLock,
+      context,
     } = this.props;
     return (
       <DragResizeBlock
@@ -63,20 +61,18 @@ export default class CapsKey extends React.Component {
         w={dimensions.resizedWidth}
         h={dimensions.resizedHeight}
         key={index}
-        isDisabled={enabled}
+        isDisabled={context.isEnabled}
         onPress={() => {
-          setState({
-            capsLock: !capsLock,
-          });
+          context.setCapsLock(!context.capsLock);
           hapticFeedback('impactLight', options);
         }}
         connectors={['tl', 'tr', 'c', 'br', 'bl']}>
-        <View style={this.capsViewStyle(keyData, capsLock)}>
+        <View style={this.capsViewStyle(keyData, context.capsLock)}>
           <Text
             style={this.capsTextStyle(
               keyData,
               dimensions.resizedFont,
-              capsLock,
+              context.capsLock,
             )}>
             {keyData.value}
           </Text>

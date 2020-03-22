@@ -27,22 +27,8 @@ const options = {
   enableVibrateFallback: true,
   ignoreAndroidSystemSettings: true,
 };
-//
-// <TouchableOpacity
-//   style={styles.menuButton}>
-//   <Icon2 name="md-clipboard" size={25}  color={"white"}/>
-// </TouchableOpacity >
 
 export default class MainView extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEnabled: true,
-      content: '',
-      capsLock: false,
-      shift: false,
-    };
-  }
   // componentWillReceiveProps(){
   //   this.exportTo(this.props.exportTo)
   // }
@@ -68,15 +54,8 @@ export default class MainView extends React.Component {
     ReactNativeHapticFeedback.trigger(type, options);
   }
 
-  setState(object) {
-    //use context instead
-    // this.setState({
-    // });
-  }
-
   render() {
-    const { openDrawer, copyToClipboard, data } = this.props;
-    const { isEnabled, content, capsLock, shift } = this.state;
+    const { openDrawer, copyToClipboard, data, context } = this.props;
 
     return (
       <View>
@@ -89,11 +68,11 @@ export default class MainView extends React.Component {
             style={styles.button}
           />
 
-          <Text style={styles.textInput}>{content}</Text>
+          <Text style={styles.textInput}>{context.content}</Text>
           <TouchableOpacity
             style={styles.clipboard}
             onPress={() => {
-              copyToClipboard(content);
+              copyToClipboard(context.content);
             }}>
             <Icon name="md-clipboard" size={25} color={'white'} />
           </TouchableOpacity>
@@ -124,9 +103,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
-                    setState={this.setState}
-                    content={content}
+                    context={context}
                   />
                 );
               } else if (keyData.value === 'Space') {
@@ -137,9 +114,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
-                    setState={this.setState}
-                    content={content}
+                    context={context}
                   />
                 );
               } else if (keyData.value === 'Shift') {
@@ -150,9 +125,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
-                    setState={this.setState}
-                    shift={shift}
+                    context={context}
                   />
                 );
               } else if (keyData.value === 'Modal') {
@@ -163,7 +136,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
+                    context={context}
                   />
                 );
               } else if (keyData.value === 'Caps') {
@@ -174,9 +147,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
-                    setState={this.setState}
-                    capsLock={capsLock}
+                    context={context}
                   />
                 );
               } else {
@@ -187,11 +158,7 @@ export default class MainView extends React.Component {
                     keyData={keyData}
                     options={options}
                     hapticFeedback={this.triggerHapticFeedback}
-                    enabled={isEnabled}
-                    setState={this.setState}
-                    capsLock={capsLock}
-                    shift={shift}
-                    content={content}
+                    context={context}
                   />
                 );
               }
@@ -225,7 +192,7 @@ const styles = StyleSheet.create({
     marginRight: 1,
     borderWidth: 2,
     borderRadius: 4,
-    borderColor: '#f5a638', //#f5a638
+    borderColor: '#f5a638',
     fontSize: 22,
     padding: 2,
     paddingLeft: 8,
@@ -250,6 +217,5 @@ const styles = StyleSheet.create({
   canvas: {
     width: width,
     height: height - 41.5,
-    //backgroundColor:"red",
   },
 });

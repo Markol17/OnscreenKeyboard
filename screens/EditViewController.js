@@ -1,9 +1,5 @@
-/**
- * rn-drawer example app
- * https://github.com/facebook/react-native
- */
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Dimensions } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const drawerStyles = {
   drawer: {

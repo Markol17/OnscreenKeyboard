@@ -10,9 +10,7 @@ export default class DelKey extends React.Component {
       options,
       hapticFeedback,
       index,
-      enabled,
-      setState,
-      content,
+      context,
     } = this.props;
     return (
       <DragResizeBlock
@@ -21,12 +19,10 @@ export default class DelKey extends React.Component {
         w={dimensions.resizedWidth}
         h={dimensions.resizedHeight}
         key={index}
-        isDisabled={enabled}
+        isDisabled={context.isEnabled}
         onPress={() => {
-          if (enabled) {
-            setState({
-              content: content.slice(0, -1),
-            });
+          if (context.isEnabled) {
+            context.setContent(context.content.slice(0, -1));
           }
           hapticFeedback('impactLight', options);
         }}

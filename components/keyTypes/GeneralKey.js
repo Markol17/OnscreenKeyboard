@@ -10,11 +10,7 @@ export default class GeneralKey extends React.Component {
       options,
       hapticFeedback,
       index,
-      enabled,
-      setState,
-      capsLock,
-      shift,
-      content,
+      context,
     } = this.props;
     return (
       <DragResizeBlock
@@ -23,22 +19,17 @@ export default class GeneralKey extends React.Component {
         w={dimensions.resizedWidth}
         h={dimensions.resizedHeight}
         key={index}
-        isDisabled={enabled}
+        isDisabled={context.isEnabled}
         onPress={() => {
-          if (enabled) {
-            if (capsLock || shift) {
-              setState({
-                content: content + keyData.value,
-              });
-              if (shift) {
-                setState({
-                  shift: false,
-                });
+          if (context.isEnabled) {
+            if (context.capsLock || context.shift) {
+              context.setContent(context.content + keyData.value);
+
+              if (context.shift) {
+                context.setShift(false);
               }
             } else {
-              setState({
-                content: content + keyData.value.toLowerCase(),
-              });
+              context.setContent(context.content + keyData.value.toLowerCase());
             }
           }
           hapticFeedback('impactLight', options);

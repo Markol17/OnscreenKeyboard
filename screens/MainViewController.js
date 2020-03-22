@@ -1,41 +1,24 @@
-/**
- * rn-drawer example app
- * https://github.com/facebook/react-native
- */
 import React, { Component } from 'react';
-import { AppRegistry, Text, View, Dimensions, Clipboard } from 'react-native';
-
-const drawerStyles = {
-  drawer: {
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 0,
-  },
-};
+import { View, Dimensions, Clipboard } from 'react-native';
 
 import Drawer from 'react-native-drawer';
-
 import Renderer from './MainViewRenderer';
 import MainViewControlPanel from './MainViewControlPanel';
 
 import FlashMessage from 'react-native-flash-message';
-import { showMessage, hideMessage } from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 
 import * as firebase from 'firebase';
+import AppStatesContext from '../components/context/AppStatesContext';
 // import tweens from './tweens';
 
 const { width } = Dimensions.get('window');
 const exportTo = ['google', 'email'];
-//const ref = new DataController;
 
 export default class EditViewController extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //anmiations stuff
-      // tweenHandlerOn: false, animation stuff to make different animations (requires extra file)
-      // tweenDuration: 350, animation to make different animations (requires extra file)
-      // tweenEasing: 'linear', animation stuff to make different animations (requires extra file)
       drawerType: 'overlay',
       openDrawerOffset: width / 2 + width / 6,
       closedDrawerOffset: 0,
@@ -120,11 +103,24 @@ export default class EditViewController extends Component {
       });
   }
 
-  //animation handler to make different animations (requires extra file)
-  // tweenHandler(ratio){
-  //   if(!this.state.tweenHandlerPreset){ return {} }
-  //   return tweens[this.state.tweenHandlerPreset](ratio)
-  // }
+  copyToClipboard = string => {
+    Clipboard.setString(string);
+    let description = 'There is nothing to copy!';
+    let message = 'Error';
+    if (string.length != 0) {
+      description = 'Copied "' + string + '" to clipboard succesfully!';
+      message = 'Copied';
+    }
+    showMessage({
+      message: message,
+      description: description,
+      type: 'info',
+    });
+  };
+
+  openDrawer = () => {
+    this.drawer.open();
+  };
 
   render() {
     const mainViewControlPanel = (
@@ -133,12 +129,12 @@ export default class EditViewController extends Component {
           this.drawer.close();
         }}
         goToEdit={() => {
-          this.props.navigation.navigate('Edit', {
+          this.props.navigation.navigate('EditScreen', {
             data: this.state.data,
           });
         }}
         goToSettings={() => {
-          this.props.navigation.navigate('Settings');
+          this.props.navigation.navigate('SettingsView');
         }}
         returnedPreset={presetName => {
           this.get(presetName);
@@ -151,59 +147,48 @@ export default class EditViewController extends Component {
       />
     );
 
-    const renderer = (
-      <Renderer
-        openDrawer={() => {
-          this.drawer.open();
-        }}
-        copyToClipboard={string => {
-          Clipboard.setString(string);
-          let description = 'There is nothing to copy!';
-          let message = 'Error';
-          if (string.length != 0) {
-            description = 'Copied "' + string + '" to clipboard succesfully!';
-            message = 'Copied';
-          }
-          showMessage({
-            message: message,
-            description: description,
-            type: 'info',
-          });
-        }}
-        exportTo={this.state.exportName}
-        data={this.state.data}
-      />
-    );
     return (
       <View style={{ height: '100%', height: '100%' }}>
-        <Drawer
-          //open={true}
-          ref={c => (this.drawer = c)}
-          type={this.state.drawerType}
-          //animation={this.state.animation}
-          openDrawerOffset={this.state.openDrawerOffset}
-          closedDrawerOffset={this.state.closedDrawerOffset}
-          panOpenMask={this.state.panOpenMask}
-          panCloseMask={this.state.panCloseMask}
-          relativeDrag={this.state.relativeDrag}
-          panThreshold={this.state.panThreshold}
-          content={mainViewControlPanel}
-          styles={drawerStyles}
-          disabled={this.state.disabled}
-          negotiatePan={true}
-          // tweenHandler={this.tweenHandler.bind(this)}
-          // tweenDuration={this.state.tweenDuration}
-          // tweenEasing={this.state.tweenEasing}
-          // acceptDoubleTap={this.state.acceptDoubleTap}
-          acceptTap={this.state.acceptTap}
-          acceptPan={this.state.acceptPan}
-          tapToClose={this.state.tapToClose}
-          negotiatePan={this.state.negotiatePan}
-          side={this.state.side}>
-          {renderer}
-        </Drawer>
+        <AppStatesContext.Consumer>
+          {appStates => (
+            <Drawer
+              ref={c => (this.drawer = c)}
+              type={this.state.drawerType}
+              openDrawerOffset={this.state.openDrawerOffset}
+              closedDrawerOffset={this.state.closedDrawerOffset}
+              panOpenMask={this.state.panOpenMask}
+              panCloseMask={this.state.panCloseMask}
+              relativeDrag={this.state.relativeDrag}
+              panThreshold={this.state.panThreshold}
+              content={mainViewControlPanel}
+              styles={drawerStyles}
+              disabled={this.state.disabled}
+              negotiatePan={true}
+              acceptTap={this.state.acceptTap}
+              acceptPan={this.state.acceptPan}
+              tapToClose={this.state.tapToClose}
+              negotiatePan={this.state.negotiatePan}
+              side={this.state.side}>
+              <Renderer
+                context={appStates}
+                openDrawer={this.openDrawer}
+                copyToClipboard={this.copyToClipboard}
+                exportTo={this.state.exportName}
+                data={this.state.data}
+              />
+            </Drawer>
+          )}
+        </AppStatesContext.Consumer>
         <FlashMessage position="top" icon="auto" />
       </View>
     );
   }
 }
+
+const drawerStyles = {
+  drawer: {
+    shadowColor: '#000000',
+    shadowOpacity: 0.8,
+    shadowRadius: 0,
+  },
+};
