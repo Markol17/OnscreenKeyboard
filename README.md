@@ -1,5 +1,5 @@
 # On-screen Keyboard
-On-screen keyboard app 
+On-screen keyboard app that allow people with disabilities to customize their own.
 
 ## Install dependencies
 
