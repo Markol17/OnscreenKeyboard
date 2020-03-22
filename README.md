@@ -14,4 +14,5 @@ Android: ``` react-native run-android ```
 ## Contributors
 
 Mark-Olivier Poulin <br/>
-Ara Kirijian
+
+## This project is open source
