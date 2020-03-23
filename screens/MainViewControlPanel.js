@@ -20,8 +20,8 @@ export default class EditViewControlPanel extends Component {
       returnedPreset,
       returnedExport,
       exports,
-      goToEdit,
-      goToSettings,
+      navigation,
+      context,
     } = this.props;
     return (
       <View style={styles.controlPanel}>
@@ -51,14 +51,16 @@ export default class EditViewControlPanel extends Component {
             <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}
-              onPress={() => goToEdit()}>
+              onPress={() => navigation.navigate('EditView')}>
               <Text style={styles.text2}>Edit</Text>
               <Icon2 name="ios-arrow-forward" size={25} color={'white'} />
             </TouchableOpacity>
             <View style={styles.bar}></View>
             <TouchableOpacity
               style={styles.menuButton}
-              onPress={() => goToSettings()}>
+              onPress={() =>
+                navigation.navigate('SettingsView', { context: context })
+              }>
               <Icon2 name="md-settings" size={30} color={'white'} />
               <Text style={styles.text1}>Settings</Text>
             </TouchableOpacity>

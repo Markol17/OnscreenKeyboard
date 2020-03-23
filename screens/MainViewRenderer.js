@@ -55,7 +55,7 @@ export default class MainView extends React.Component {
   }
 
   render() {
-    const { openDrawer, copyToClipboard, data, context } = this.props;
+    const { openDrawer, copyToClipboard, context } = this.props;
 
     return (
       <View>
@@ -83,7 +83,7 @@ export default class MainView extends React.Component {
             onInit={() => {
               return null;
             }}>
-            {data.map((keyData, index) => {
+            {context.keysData.map((keyData, index) => {
               let ratio = width / height - 0.989;
               let item = null;
 

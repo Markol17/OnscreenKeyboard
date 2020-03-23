@@ -15,7 +15,7 @@ import AppStatesContext from '../components/context/AppStatesContext';
 const { width } = Dimensions.get('window');
 const exportTo = ['google', 'email'];
 
-export default class EditViewController extends Component {
+export default class MainViewController extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,35 +33,17 @@ export default class EditViewController extends Component {
       negotiatePan: true,
       side: 'left',
 
-      data: [],
       presets: [],
     };
   }
-  //component is a deprecated method should update in the future
+
+  static contextType = AppStatesContext;
+
   componentWillMount() {
     this.get('Default');
     this.getAll();
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state.data.length != 0 && prevState.data != this.state.data) {
-      showMessage({
-        message: 'Success',
-        description: 'Preset loaded succesfully!',
-        type: 'success',
-      });
-    }
-  }
-  componentDidMount() {
-    if (this.state.data.length === 0) {
-      showMessage({
-        message: 'Error',
-        description:
-          'An error occured while trying to retrieve this preset. You may want to check your internet connection.',
-        type: 'danger',
-      });
-    }
-  }
-  //db custom methods
+
   getAll() {
     firebase
       .database()
@@ -82,11 +64,25 @@ export default class EditViewController extends Component {
     firebase
       .database()
       .ref(name)
-      .on('value', data => {
-        this.setState({
-          data: data.val(),
-        });
-      });
+      .on(
+        'value',
+        data => {
+          this.context.setKeysData(data.val());
+          showMessage({
+            message: 'Success',
+            description: 'Preset loaded succesfully!',
+            type: 'success',
+          });
+        },
+        function(error) {
+          showMessage({
+            message: 'Error',
+            description:
+              'An error occured while trying to retrieve this preset. You may want to check your internet connection.',
+            type: 'danger',
+          });
+        },
+      );
   }
 
   //should go in editviewcontrol
@@ -122,20 +118,17 @@ export default class EditViewController extends Component {
     this.drawer.open();
   };
 
+  closeDrawer = () => {
+    this.drawer.close();
+  };
+
   render() {
+    const { navigation } = this.props;
     const mainViewControlPanel = (
       <MainViewControlPanel
-        closeDrawer={() => {
-          this.drawer.close();
-        }}
-        goToEdit={() => {
-          this.props.navigation.navigate('EditScreen', {
-            data: this.state.data,
-          });
-        }}
-        goToSettings={() => {
-          this.props.navigation.navigate('SettingsView');
-        }}
+        context={this.context}
+        closeDrawer={this.closeDrawer}
+        navigation={navigation}
         returnedPreset={presetName => {
           this.get(presetName);
         }}
@@ -149,36 +142,31 @@ export default class EditViewController extends Component {
 
     return (
       <View style={{ height: '100%', height: '100%' }}>
-        <AppStatesContext.Consumer>
-          {appStates => (
-            <Drawer
-              ref={c => (this.drawer = c)}
-              type={this.state.drawerType}
-              openDrawerOffset={this.state.openDrawerOffset}
-              closedDrawerOffset={this.state.closedDrawerOffset}
-              panOpenMask={this.state.panOpenMask}
-              panCloseMask={this.state.panCloseMask}
-              relativeDrag={this.state.relativeDrag}
-              panThreshold={this.state.panThreshold}
-              content={mainViewControlPanel}
-              styles={drawerStyles}
-              disabled={this.state.disabled}
-              negotiatePan={true}
-              acceptTap={this.state.acceptTap}
-              acceptPan={this.state.acceptPan}
-              tapToClose={this.state.tapToClose}
-              negotiatePan={this.state.negotiatePan}
-              side={this.state.side}>
-              <Renderer
-                context={appStates}
-                openDrawer={this.openDrawer}
-                copyToClipboard={this.copyToClipboard}
-                exportTo={this.state.exportName}
-                data={this.state.data}
-              />
-            </Drawer>
-          )}
-        </AppStatesContext.Consumer>
+        <Drawer
+          ref={c => (this.drawer = c)}
+          type={this.state.drawerType}
+          openDrawerOffset={this.state.openDrawerOffset}
+          closedDrawerOffset={this.state.closedDrawerOffset}
+          panOpenMask={this.state.panOpenMask}
+          panCloseMask={this.state.panCloseMask}
+          relativeDrag={this.state.relativeDrag}
+          panThreshold={this.state.panThreshold}
+          content={mainViewControlPanel}
+          styles={drawerStyles}
+          disabled={this.state.disabled}
+          negotiatePan={true}
+          acceptTap={this.state.acceptTap}
+          acceptPan={this.state.acceptPan}
+          tapToClose={this.state.tapToClose}
+          negotiatePan={this.state.negotiatePan}
+          side={this.state.side}>
+          <Renderer
+            context={this.context}
+            openDrawer={this.openDrawer}
+            copyToClipboard={this.copyToClipboard}
+            exportTo={this.state.exportName}
+          />
+        </Drawer>
         <FlashMessage position="top" icon="auto" />
       </View>
     );

@@ -1,271 +1,229 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-    View,
-    TouchableOpacity
-} from 'react-native';
-import leftPad from 'left-pad';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import ColorPalette from 'react-native-color-palette';
+import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
-
+const colors = [
+  '#C0392B',
+  '#E74C3C',
+  '#f5a638',
+  '#ede02b',
+  '#9B59B6',
+  '#8E44AD',
+  '#2980B9',
+  '#32a852',
+  '#1a1a1a',
+  '#FFFFFF',
+];
 
 export default class SettingsView extends React.Component {
-
-    constructor(props) {
-        super(props)
-        this.state = {
-            backgroundColor : '#1a1a1a',
-            textColor: '#FFFFFF',
-            borderColor: '#f5a638',
-        }
-    }
-
-    render() {
-
-        return (
-            <View style={this.containerStyle(this.state)}>
-                <View style={{ margin: 20 }}>
-                    <Text style={this.headerStyle(this.state)} >Settings</Text>
-                </View>
-                <View style={{ flex: 1, flexDirection: "row" }}>
-                    <View style={{ flex: 1, flexDirection: "column" }}>
-                        <Text style={this.textStyle(this.state)}> Select a background colour</Text>
-                        <View style={{ flew: 1, flexDirection: "row" }}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                backgroundColor: "white"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("white")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "black"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("black")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "grey"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("grey")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "red"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("red")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "blue"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("blue")}></View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={style.row}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "green"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("green")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    backgroundColor: "yellow"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("yellow")}></View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View style={this.borderStyle(this.state)}></View>
-
-
-                    <View style={{ flex: 1, flexDirection: "column", alignItems: "center"}}>
-                        <Text style={this.textStyle(this.state)}> Select a font colour</Text>
-                        <View style={{ flew: 1, flexDirection: "row", width: "100%" }}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "white"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("white")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "black"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("black")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "grey"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("grey")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "red"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("red")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "blue"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("blue")}></View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={style.row}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "green"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("green")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    textColor: "yellow"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("yellow")}></View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <View style={this.borderStyle(this.state)}></View>
-
-                    <View style={{ flex: 1, flexDirection: "column" }}>
-                        <Text style={this.textStyle(this.state)}> Select an outline colour</Text>
-                        <View style={{ flew: 1, flexDirection: "row", alignItems: 'center' }}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "white"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("white")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "black"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("black")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "grey"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("grey")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "red"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("red")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "blue"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("blue")}></View>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={style.row}>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "green"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("green")}></View>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => this.setState({
-                                    borderColor: "yellow"
-                                })}
-                                style={style.button}>
-                                <View style={this.themePreview("yellow")}></View>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </View>
-            </View>
-
-      );
+  constructor(props) {
+    super(props);
+    this.state = {
+      backgroundColor: '#1a1a1a',
+      fontColor: '#FFFFFF',
+      outlineColor: '#f5a638',
+    };
   }
 
-    headerStyle = function (state) {
-        return {
-            color: state.textColor,
-            textAlign: "center",
-            fontSize: 25,
-            paddingBottom: 20
-        }
-    }
+  handleSave() {
+    console.log(this.props);
+  }
 
-    containerStyle = function (state) {
-        return {
-            height: '100%',
-            backgroundColor: state.backgroundColor,
-            alignItems: "center"
-        }
-    }
+  render() {
+    console.log(this.props);
+    const BackgroundColorPicker = () => {
+      return (
+        <ColorPalette
+          onChange={color =>
+            this.setState({
+              backgroundColor: color,
+            })
+          }
+          value={this.state.backgroundColor}
+          colors={colors}
+          title={null}
+          icon={
+            <MaterialCommunityIcon
+              name={'check-circle-outline'}
+              size={25}
+              color={'white'}
+            />
+          }
+        />
+      );
+    };
 
-    themePreview = function (color, state) {
-        return {
-            margin: 5,
-            height: 35,
-            width: 35,
-            backgroundColor: color,
-            borderColor: this.state.borderColor,
-            borderWidth:1
-        }
-    }
+    const FontColorPicker = () => {
+      return (
+        <ColorPalette
+          onChange={color =>
+            this.setState({
+              fontColor: color,
+            })
+          }
+          value={this.state.fontColor}
+          colors={colors}
+          title={null}
+          icon={
+            <MaterialCommunityIcon
+              name={'check-circle-outline'}
+              size={25}
+              color={'white'}
+            />
+          }
+        />
+      );
+    };
 
+    const OutlineColorPicker = () => {
+      return (
+        <ColorPalette
+          onChange={color =>
+            this.setState({
+              outlineColor: color,
+            })
+          }
+          value={this.state.outlineColor}
+          colors={colors}
+          title={null}
+          icon={
+            <MaterialCommunityIcon
+              name={'check-circle-outline'}
+              size={25}
+              color={'white'}
+            />
+          }
+        />
+      );
+    };
 
-    textStyle = function (state) {
-        return {
-            fontSize: 15,
-            color : state.textColor,
-            margin:5,
-            paddingBottom: 5,
-            textAlign : 'center'
-        }
-    }
+    return (
+      <View style={this.containerStyle(this.state)}>
+        <View
+          style={{
+            margin: 20,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity style={style.backButton}>
+            <IonIcon
+              name="ios-arrow-back"
+              size={45}
+              color={this.state.fontColor}
+            />
+          </TouchableOpacity>
+          <Text style={this.headerStyle(this.state)}>Settings</Text>
+        </View>
+        <View style={{ flex: 1, flexDirection: 'row' }}>
+          <View style={{ flex: 1, flexDirection: 'column' }}>
+            <Text style={this.textStyle(this.state)}>
+              Select a background colour
+            </Text>
+            <BackgroundColorPicker />
+          </View>
 
-    borderStyle = function (state) {
-        return {
-            height: '100%',
-            width: 1,
-            backgroundColor: state.borderColor
-        }
-    }
+          <View
+            style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+            <Text style={this.textStyle(this.state)}>Select a font colour</Text>
+            <FontColorPicker />
+          </View>
 
-};
+          <View style={{ flex: 1, flexDirection: 'column' }}>
+            <Text style={this.textStyle(this.state)}>
+              Select an outline colour
+            </Text>
+            <OutlineColorPicker />
+          </View>
+        </View>
+        <TouchableOpacity
+          onPress={this.handleSave}
+          style={this.saveButton(this.state)}>
+          <Text style={this.buttonText(this.state)}>Save</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
+  buttonText = state => {
+    return {
+      color: state.fontColor,
+      fontSize: 20,
+      fontWeight: 'bold',
+    };
+  };
+  //   onPress={() => navigation.navigate('EditView')}>
+  saveButton = state => {
+    return {
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 180,
+      padding: 15,
+      marginBottom: 20,
+      flexDirection: 'row',
+      backgroundColor: 'transparent',
+      borderWidth: 2,
+      borderColor: state.outlineColor,
+      borderRadius: 5,
+    };
+  };
+
+  headerStyle = state => {
+    return {
+      color: state.fontColor,
+      textAlign: 'center',
+      fontSize: 40,
+      paddingBottom: 20,
+      fontWeight: 'bold',
+    };
+  };
+
+  containerStyle = state => {
+    return {
+      height: '100%',
+      backgroundColor: state.backgroundColor,
+      alignItems: 'center',
+    };
+  };
+
+  themePreview = (color, state) => {
+    return {
+      margin: 5,
+      height: 35,
+      width: 35,
+      backgroundColor: color,
+      borderColor: this.state.outlineColor,
+      borderWidth: 1,
+    };
+  };
+
+  textStyle = state => {
+    return {
+      fontSize: 15,
+      color: state.fontColor,
+      margin: 5,
+      textAlign: 'center',
+      fontWeight: 'bold',
+    };
+  };
+
+  borderStyle = state => {
+    return {
+      height: '100%',
+      width: 1,
+      backgroundColor: state.outlineColor,
+    };
+  };
+}
 
 const style = StyleSheet.create({
-    button: {
-        margin: 1
-    },
-    row:{
-         flex:1,
-         flexDirection:"row",
-         width: "100%",
-
-    }
-})
+  backButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 70,
+    height: 70,
+    flexDirection: 'row',
+    backgroundColor: 'transparent',
+  },
+});
