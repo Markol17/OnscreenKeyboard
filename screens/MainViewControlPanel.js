@@ -7,12 +7,53 @@ import {
   ScrollView,
 } from 'react-native';
 
-import Button from '../components/OpenCloseButton';
-import Icon1 from 'react-native-vector-icons/Fontisto';
-import Icon2 from 'react-native-vector-icons/Ionicons';
+import CloseButton from '../components/CloseButton';
+import Fontisto from 'react-native-vector-icons/Fontisto';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 import DropDown from '../components/DropDown';
 
 export default class EditViewControlPanel extends Component {
+  line(context) {
+    return {
+      height: 1,
+      width: '82%',
+      backgroundColor: context.theme.outlineColor,
+    };
+  }
+
+  controlPanel(context) {
+    return {
+      flex: 1,
+      flexDirection: 'column',
+      backgroundColor: context.theme.backgroundColor,
+    };
+  }
+
+  menuText(context) {
+    return {
+      fontSize: 30,
+      textAlign: 'center',
+      color: context.theme.fontColor,
+      fontWeight: 'bold',
+    };
+  }
+
+  settingsText(context) {
+    return {
+      color: context.theme.fontColor,
+      fontSize: 20,
+      marginLeft: 15,
+    };
+  }
+
+  editText(context) {
+    return {
+      color: context.theme.fontColor,
+      fontSize: 20,
+      marginRight: 15,
+    };
+  }
+
   render() {
     const {
       closeDrawer,
@@ -24,45 +65,55 @@ export default class EditViewControlPanel extends Component {
       context,
     } = this.props;
     return (
-      <View style={styles.controlPanel}>
+      <View style={this.controlPanel(context)}>
         <View style={styles.header}>
-          <Text style={styles.menu}>Main Menu</Text>
-          <Button
+          <Text style={this.menuText(context)}>Main Menu</Text>
+          <CloseButton
             onPress={() => {
               closeDrawer();
             }}
-            icon="close"
+            context={context}
             style={styles.closeButton}
           />
         </View>
         <ScrollView>
-          <View style={styles.menuItems}>
+          <View>
             <DropDown
+              context={context}
               name="Presets"
               data={presets}
               passPresetName={presetName => returnedPreset(presetName)}
             />
-            <View style={styles.bar}></View>
+            <View style={this.line(context)}></View>
             <DropDown
+              context={context}
               name="Export to"
               data={exports}
               passPresetName={exportName => returnedExport(exportName)}
             />
-            <View style={styles.bar}></View>
+            <View style={this.line(context)}></View>
             <TouchableOpacity
               style={styles.menuButton}
               onPress={() => navigation.navigate('EditView')}>
-              <Text style={styles.text2}>Edit</Text>
-              <Icon2 name="ios-arrow-forward" size={25} color={'white'} />
+              <Text style={this.editText(context)}>Edit</Text>
+              <IonIcon
+                name="ios-arrow-forward"
+                size={25}
+                color={context.theme.fontColor}
+              />
             </TouchableOpacity>
-            <View style={styles.bar}></View>
+            <View style={this.line(context)}></View>
             <TouchableOpacity
               style={styles.menuButton}
               onPress={() =>
                 navigation.navigate('SettingsView', { context: context })
               }>
-              <Icon2 name="md-settings" size={30} color={'white'} />
-              <Text style={styles.text1}>Settings</Text>
+              <IonIcon
+                name="md-settings"
+                size={30}
+                color={context.theme.fontColor}
+              />
+              <Text style={this.settingsText(context)}>Settings</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -70,25 +121,9 @@ export default class EditViewControlPanel extends Component {
     );
   }
 }
-//goBack() react navigation
+
 const styles = StyleSheet.create({
-  text1: {
-    color: 'white',
-    fontSize: 20,
-    marginLeft: 15,
-  },
-  text2: {
-    color: 'white',
-    fontSize: 20,
-    marginRight: 15,
-  },
-  controlPanel: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#1a1a1a',
-  },
   header: {
-    //backgroundColor:"red",
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -102,22 +137,10 @@ const styles = StyleSheet.create({
     height: 60,
     marginLeft: 10,
   },
-  menu: {
-    fontSize: 30,
-    textAlign: 'center',
-    color: 'white',
-    fontWeight: 'bold',
-  },
-  menuItems: {},
   menuButton: {
     alignItems: 'center',
     padding: 20,
     flexDirection: 'row',
     backgroundColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  bar: {
-    height: 1,
-    width: '82%',
-    backgroundColor: '#f5a638', //#32a852
   },
 });

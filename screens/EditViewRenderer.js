@@ -9,7 +9,7 @@ import {
   Linking,
 } from 'react-native';
 
-import Button from '../components/OpenCloseButton';
+import Button from '../components/OpenButton';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { DragResizeBlock, DragResizeContainer } from 'react-native-drag-resize';
@@ -125,7 +125,6 @@ export default class MainView extends React.Component {
     }
   }
   exportTo(exportName) {
-    console.log(this.state.content);
     if (exportName === 'google') {
       Linking.openURL(
         'https://google.com/search?q=' + this.state.content,

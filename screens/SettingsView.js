@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import ColorPalette from 'react-native-color-palette';
 import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import IonIcon from 'react-native-vector-icons/Ionicons';
+import FlashMessage from 'react-native-flash-message';
+import { showMessage } from 'react-native-flash-message';
 
 const colors = [
   '#C0392B',
@@ -25,14 +27,21 @@ export default class SettingsView extends React.Component {
       fontColor: '#FFFFFF',
       outlineColor: '#f5a638',
     };
+    this.flashMessageContainer = React.createRef();
   }
 
-  handleSave() {
-    console.log(this.props);
-  }
+  handleSave = () => {
+    const { context } = this.props.route.params;
+    showMessage({
+      message: 'Success',
+      description: 'Theme saved succesfully!',
+      type: 'success',
+    });
+    context.setTheme(this.state);
+  };
 
   render() {
-    console.log(this.props);
+    const { context } = this.props.route.params;
     const BackgroundColorPicker = () => {
       return (
         <ColorPalette
@@ -100,7 +109,9 @@ export default class SettingsView extends React.Component {
     };
 
     return (
-      <View style={this.containerStyle(this.state)}>
+      <View
+        ref={this.flashMessageContainer}
+        style={this.containerStyle(this.state)}>
         <View
           style={{
             margin: 20,
@@ -125,7 +136,11 @@ export default class SettingsView extends React.Component {
           </View>
 
           <View
-            style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
+            style={{
+              flex: 1,
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}>
             <Text style={this.textStyle(this.state)}>Select a font colour</Text>
             <FontColorPicker />
           </View>
@@ -142,6 +157,11 @@ export default class SettingsView extends React.Component {
           style={this.saveButton(this.state)}>
           <Text style={this.buttonText(this.state)}>Save</Text>
         </TouchableOpacity>
+        <FlashMessage
+          ref={this.flashMessageContainer}
+          position="top"
+          icon="auto"
+        />
       </View>
     );
   }
@@ -182,6 +202,7 @@ export default class SettingsView extends React.Component {
   containerStyle = state => {
     return {
       height: '100%',
+      width: '100%',
       backgroundColor: state.backgroundColor,
       alignItems: 'center',
     };

@@ -40,6 +40,7 @@ export default class MainViewController extends Component {
   static contextType = AppStatesContext;
 
   componentWillMount() {
+    this.context.reset();
     this.get('Default');
     this.getAll();
   }

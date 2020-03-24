@@ -8,7 +8,7 @@ import {
   Linking,
 } from 'react-native';
 
-import Button from '../components/OpenCloseButton';
+import OpenButton from '../components/OpenButton';
 import DelKey from '../components/keyTypes/DelKey';
 import SpaceKey from '../components/keyTypes/SpaceKey';
 import ShiftKey from '../components/keyTypes/ShiftKey';
@@ -29,10 +29,6 @@ const options = {
 };
 
 export default class MainView extends React.Component {
-  // componentWillReceiveProps(){
-  //   this.exportTo(this.props.exportTo)
-  // }
-
   exportTo(exportName) {
     if (exportName === 'google') {
       Linking.openURL(
@@ -41,7 +37,7 @@ export default class MainView extends React.Component {
         showMessage({
           message: 'Error',
           description:
-            'An error occured while trying to retrieve this preset. You may want to check your internet connection.',
+            'An error occured while trying to make this search. You may want to check your internet connection.',
           type: 'danger',
         }),
       );
@@ -54,30 +50,79 @@ export default class MainView extends React.Component {
     ReactNativeHapticFeedback.trigger(type, options);
   }
 
+  clipboard(context) {
+    return {
+      width: 50,
+      height: 40,
+      marginRight: 7,
+      borderColor: context.theme.outlineColor,
+      borderRadius: 4,
+      borderWidth: 2,
+      alignItems: 'center',
+      justifyContent: 'center',
+    };
+  }
+
+  container(context) {
+    return {
+      alignItems: 'center',
+      height: '100%',
+      backgroundColor: context.theme.backgroundColor,
+    };
+  }
+
+  header(context) {
+    return {
+      paddingTop: 7,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      backgroundColor: context.theme.backgroundColor,
+    };
+  }
+
+  textInput(context) {
+    return {
+      color: 'white',
+      width: width - 125, //55
+      height: 40,
+      marginRight: 1,
+      borderWidth: 2,
+      borderRadius: 4,
+      borderColor: context.theme.outlineColor,
+      fontSize: 22,
+      padding: 2,
+      paddingLeft: 8,
+    };
+  }
+
   render() {
     const { openDrawer, copyToClipboard, context } = this.props;
-
     return (
       <View>
-        <View style={styles.header}>
-          <Button
+        <View style={this.header(context)}>
+          <OpenButton
+            context={context}
             onPress={() => {
               openDrawer();
             }}
-            icon="open"
             style={styles.button}
           />
 
-          <Text style={styles.textInput}>{context.content}</Text>
+          <Text style={this.textInput(context)}>{context.content}</Text>
           <TouchableOpacity
-            style={styles.clipboard}
+            style={this.clipboard(context)}
             onPress={() => {
               copyToClipboard(context.content);
             }}>
-            <Icon name="md-clipboard" size={25} color={'white'} />
+            <Icon
+              name="md-clipboard"
+              size={25}
+              color={context.theme.fontColor}
+            />
           </TouchableOpacity>
         </View>
-        <View style={styles.container}>
+        <View style={this.container(context)}>
           <DragResizeContainer
             style={styles.canvas}
             onInit={() => {
@@ -172,48 +217,11 @@ export default class MainView extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    paddingTop: 7,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#1a1a1a',
-  },
-
   button: {
     width: 40,
     marginLeft: 7,
   },
 
-  textInput: {
-    color: 'white',
-    width: width - 125, //55
-    height: 40,
-    marginRight: 1,
-    borderWidth: 2,
-    borderRadius: 4,
-    borderColor: '#f5a638',
-    fontSize: 22,
-    padding: 2,
-    paddingLeft: 8,
-    //padding:5,
-  },
-  clipboard: {
-    width: 50,
-    height: 40,
-    marginRight: 7,
-    borderColor: '#f5a638',
-    borderRadius: 4,
-    borderWidth: 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  //container for the keyboard
-  container: {
-    alignItems: 'center',
-    height: '100%',
-    backgroundColor: '#1a1a1a',
-  },
   canvas: {
     width: width,
     height: height - 41.5,

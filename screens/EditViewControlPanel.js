@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import DropDownItem from 'react-native-drop-down-item';
-import Button from '../components/OpenCloseButton';
+import CloseButton from '../components/CloseButton';
 import Icon1 from 'react-native-vector-icons/Fontisto';
 import Icon2 from 'react-native-vector-icons/Ionicons';
 
@@ -19,11 +19,10 @@ export default class EditViewControlPanel extends Component {
       <View style={styles.controlPanel}>
         <View style={styles.header}>
           <Text style={styles.menu}>Edit Menu</Text>
-          <Button
+          <CloseButton
             onPress={() => {
               this.props.closeDrawer();
             }}
-            icon="close"
             style={styles.closeButton}
           />
         </View>
