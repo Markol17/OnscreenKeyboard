@@ -15,7 +15,7 @@
     "@react-navigation/stack": "^5.2.3",
     "firebase": "^7.5.0",
     "react": "16.9.0",
-    "react-native": "0.61.1",
+    "react-native": "0.62.3",
     "react-native-color-palette": "^2.2.0",
     "react-native-drag-resize": "git+https://github.com/Markol17/react-native-drag-resize.git",
     "react-native-drawer": "^2.5.1",
